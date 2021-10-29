@@ -10,10 +10,13 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "jeroennoten/laravel-adminlte": "^3.6",
+        "jeroennoten/laravel-adminlte": "^3.7",
         "laravel/framework": "^8.40",
+        "laravel/jetstream": "^2.4",
+        "laravel/sanctum": "^2.12",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.3"
+        "laravel/ui": "^3.3",
+        "livewire/livewire": "^2.5"
     },
     "require-dev": {
         "beyondcode/laravel-er-diagram-generator": "^1.5",

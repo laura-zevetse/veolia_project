@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\IncapacidadController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,6 @@ use App\Http\Controllers\SearchController;
 | Here is where you can register web routes for your application.
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/persona', [PersonaController::class, 'listPerson'])->name('persona.list');
 
@@ -54,7 +52,23 @@ Route::get('/incapacidad', function () {
 
 
 
-;
+
 
 /*Route::resource('persona', PersonaController::class);*/
 Auth::routes();
+
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+    return view('auth.login');
+});
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+
+
+
+Route::get('/welcome', [HomeController::class, 'index'])->name('welcome');
+
+
