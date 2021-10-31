@@ -8,7 +8,7 @@
     <script src="//code.jquery.com/jquery-3.5.1.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
+    <script type="text/javascript" src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
 
     <!--Title and breadcrum-->
 
@@ -65,7 +65,15 @@
                 <div class="tab-content" id="menu-content">
                     <!------Content Menu1-forms-------->
                     <div class="tab-pane fade show active" id="menu1" role="tabpanel">
-                        <form enctype="multipart/form-data" action="{{ route('persona.store') }}" method="POST"
+                        <div class="alert alert-danger print-error-msg" style="display:none">
+                            <ul></ul>
+                        </div>
+
+
+
+
+
+                        <form id="firstForm"  enctype="multipart/form-data" action="{{ route('persona.store') }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
@@ -79,9 +87,6 @@
                                     <img id="foto_img" src="../img/foto.png" style="width: 80%;" />
                                     <input class="form-control mt-3" id="foto" name="foto" type="file"
                                         placeholder="Elija la foto del colaborador" accept="image/*" />
-                                    @error('foto')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="card-body">
@@ -92,9 +97,6 @@
                                                 <input type="text" class="form-control" name="primer_apellido"
                                                     id="primer_apellido" value="{{ old('primer_apellido') }}"
                                                     onkeyup="this.value=this.value.toUpperCase()" />
-                                                @error('primer_apellido')
-                                                    <small class="text-danger">*{{ $message }}</small>
-                                                @enderror
                                             </div>
                                             <label for="segundo_apellido" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Segundo Apellido</label>
@@ -109,9 +111,6 @@
                                                 <input type="text" class="form-control" name="nombre" id="nombre"
                                                     placeholder="" onkeyup="this.value=this.value.toUpperCase()"
                                                     value="{{ old('nombre') }}" />
-                                                @error('nombre')
-                                                    <small class="text-danger">*{{ $message }}</small>
-                                                @enderror
                                             </div>
                                             <label for="tipo_documento" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Tipo de documento</label>
@@ -143,9 +142,6 @@
                                                                 class="far fa-address-card text-lightblue"></i></span>
                                                     </div>
                                                 </div>
-                                                @error('id_persona')
-                                                    <small class="text-danger">*{{ $message }}</small>
-                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -366,6 +362,7 @@
 
                     <!-------Content Menu2-forms------->
                     <div class="tab-pane fade" id="menu2" role="tabpanel">
+
                         <form enctype="multipart/form-data" action="{{ route('persona.familiar') }}" method="POST">
                             @csrf
                             <div class="row">
@@ -929,6 +926,34 @@
                         $('#foto_img').attr('src', e.target.result);
                     }
                     reader.readAsDataURL(this.files[0]);
+                });
+                $("#btnGuardarM1").on('click', function(e){
+                    e.preventDefault();
+                    let data = $("#firstForm").serialize();
+                    $.ajax({
+                        url: "{{ route('persona.store') }}",
+                        type:'POST',
+                        data: data,
+                        success: function(data) {
+                            if(data.status){
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+                        },
+                        error: function(err){
+                            $(".print-error-msg").find("ul").html('');
+                            $(".print-error-msg").css('display','block');
+                            var obj = JSON.parse(err.responseText);
+                            Object.entries(obj.errors).forEach(([key, value]) => {
+                                    $(".print-error-msg").find("ul").append('<li>'+value.toString().replace('id persona', 'Número de documento')+'</li>');
+   
+                            });
+                        }
+                    });
                 });
             });
         </script>

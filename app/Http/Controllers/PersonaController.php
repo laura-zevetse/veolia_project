@@ -32,6 +32,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
+use Validator;
 
 class PersonaController extends Controller
 {
@@ -129,7 +130,13 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $arrResponse = array();
+        $messages = array(
+            'primer_apeliido.required' => 'El campo primer apellido es obligatorio',
+            'primer_apeliido.max:12' => 'El campo primer apellido no puede ser mayor los 15 caracteres',
+            'primer_apellido' => 'El campo primer apellido no puede ser menos a 3 caractes'
+        );
+    	$validator = Validator::make($request->all(), [
             'foto' => 'image',
             'primer_apellido' => 'required|min:3|max:15',
             'nombre' => 'required',
@@ -140,17 +147,29 @@ class PersonaController extends Controller
         ]);
 
 
-        $datosPersona = request()->except('_token');
-
-        if($archivo=$request->file('foto')){
-            $nombre=$archivo->getClientOriginalName();
-            $archivo->move('img', $nombre);
-            $datosPersona['foto']=$nombre;
+        
+        if ($validator->passes()) 
+        {
+            $datosPersona = request()->except('_token');
+            if($archivo=$request->file('foto')){
+                $nombre=$archivo->getClientOriginalName();
+                $archivo->move('img', $nombre);
+                $datosPersona['foto']=$nombre;
+            }
+            Persona::insert($datosPersona);
+            $arrResponse['status'] = true;
+            $arrResponse['message'] = 'Información guardada con éxito !';
+            return response()->json($arrResponse, 200);
         }
+        if ($validator->fails())
+        {
 
-        Persona::insert($datosPersona);
-        return back();
 
+            return response()->json([
+                'errors' => $validator->getMessageBag()->toArray()
+            ], 400);
+        }
+        
     }
 
     public function familiar(Request $request)
