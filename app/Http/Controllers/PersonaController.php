@@ -131,11 +131,6 @@ class PersonaController extends Controller
     public function store(Request $request)
     {
         $arrResponse = array();
-        $messages = array(
-            'primer_apeliido.required' => 'El campo primer apellido es obligatorio',
-            'primer_apeliido.max:12' => 'El campo primer apellido no puede ser mayor los 15 caracteres',
-            'primer_apellido' => 'El campo primer apellido no puede ser menos a 3 caractes'
-        );
     	$validator = Validator::make($request->all(), [
             'foto' => 'image',
             'primer_apellido' => 'required|min:3|max:15',
@@ -145,9 +140,6 @@ class PersonaController extends Controller
             'email' => 'required|email|regex:/(.*)@veolia\.com$/i|',
             'fecha_nacimiento' => 'required'
         ]);
-
-
-        
         if ($validator->passes()) 
         {
             $datosPersona = request()->except('_token');
@@ -162,9 +154,7 @@ class PersonaController extends Controller
             return response()->json($arrResponse, 200);
         }
         if ($validator->fails())
-        {
-
-
+        { 
             return response()->json([
                 'errors' => $validator->getMessageBag()->toArray()
             ], 400);

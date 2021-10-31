@@ -65,14 +65,9 @@
                 <div class="tab-content" id="menu-content">
                     <!------Content Menu1-forms-------->
                     <div class="tab-pane fade show active" id="menu1" role="tabpanel">
-                        <div class="alert alert-danger print-error-msg" style="display:none">
+                        <div id="errFormPersona" class="alert alert-danger print-error-msg" style="display:none">
                             <ul></ul>
                         </div>
-
-
-
-
-
                         <form id="firstForm"  enctype="multipart/form-data" action="{{ route('persona.store') }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
@@ -351,7 +346,7 @@
                                             </div>
                                         </div>
                                         <button type="submit" id="btnGuardarM1"
-                                            class="btn btn-success float-right">Guardar</button>
+                                            class="btn btn-success float-right">Continuar</button>
                                     </div>
                                 </div>
                             </div>
@@ -920,6 +915,11 @@
         </script>
         <script>
             $(document).ready(function(e) {
+                $("#menu2-tab").addClass('disabled');
+                $("#menu3-tab").addClass('disabled');
+                $("#menu4-tab").addClass('disabled');
+                $("#menu5-tab").addClass('disabled');
+                $("#menu6-tab").addClass('disabled');
                 $('#foto').change(function() {
                     let reader = new FileReader();
                     reader.onload = (e) => {
@@ -935,6 +935,7 @@
                         type:'POST',
                         data: data,
                         success: function(data) {
+                            $("#errFormPersona").css({'display':'none'});
                             if(data.status){
                                 Swal.fire({
                                     icon: 'success',
@@ -942,6 +943,12 @@
                                     showConfirmButton: false,
                                     timer: 1500
                                 });
+                                enabledTabs("menu2-tab");
+                                $("#menu2-tab").trigger("click");
+                                setTimeout(
+                                    $("#menu2-tab").trigger("click"),
+                                    3500
+                                );
                             }
                         },
                         error: function(err){
@@ -950,11 +957,13 @@
                             var obj = JSON.parse(err.responseText);
                             Object.entries(obj.errors).forEach(([key, value]) => {
                                     $(".print-error-msg").find("ul").append('<li>'+value.toString().replace('id persona', 'Número de documento')+'</li>');
-   
                             });
                         }
                     });
                 });
             });
+            function enabledTabs(idTab){
+                $("#"+idTab).removeClass('disabled');
+            }
         </script>
     @endsection
