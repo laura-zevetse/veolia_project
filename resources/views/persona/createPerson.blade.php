@@ -9,6 +9,8 @@
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script type="text/javascript" src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/colaboradorDatosPersonales.js') }}"></script>
+
 
     <!--Title and breadcrum-->
 
@@ -906,64 +908,19 @@
     @endsection
     <!--Scripts-->
     @section('js')
-        <script type="text/javascript" src="{{ asset('js/app.js') }}">
-        </script>
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         <script>
             $(function() {
                 $('[data-toggle="tooltip"]').tooltip()
             })
-        </script>
-        <script>
             $(document).ready(function(e) {
-                $("#menu2-tab").addClass('disabled');
-                $("#menu3-tab").addClass('disabled');
-                $("#menu4-tab").addClass('disabled');
-                $("#menu5-tab").addClass('disabled');
-                $("#menu6-tab").addClass('disabled');
                 $('#foto').change(function() {
                     let reader = new FileReader();
                     reader.onload = (e) => {
                         $('#foto_img').attr('src', e.target.result);
                     }
                     reader.readAsDataURL(this.files[0]);
-                });
-                $("#btnGuardarM1").on('click', function(e){
-                    e.preventDefault();
-                    let data = $("#firstForm").serialize();
-                    $.ajax({
-                        url: "{{ route('persona.store') }}",
-                        type:'POST',
-                        data: data,
-                        success: function(data) {
-                            $("#errFormPersona").css({'display':'none'});
-                            if(data.status){
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: data.message,
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-                                enabledTabs("menu2-tab");
-                                $("#menu2-tab").trigger("click");
-                                setTimeout(
-                                    $("#menu2-tab").trigger("click"),
-                                    3500
-                                );
-                            }
-                        },
-                        error: function(err){
-                            $(".print-error-msg").find("ul").html('');
-                            $(".print-error-msg").css('display','block');
-                            var obj = JSON.parse(err.responseText);
-                            Object.entries(obj.errors).forEach(([key, value]) => {
-                                    $(".print-error-msg").find("ul").append('<li>'+value.toString().replace('id persona', 'Número de documento')+'</li>');
-                            });
-                        }
-                    });
-                });
+                });     
             });
-            function enabledTabs(idTab){
-                $("#"+idTab).removeClass('disabled');
-            }
         </script>
     @endsection
