@@ -3,14 +3,12 @@
 
     <!--Styles CSS-->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
     <!-- Script -->
     <script src="//code.jquery.com/jquery-3.5.1.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script type="text/javascript" src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/colaboradorDatosPersonales.js') }}"></script>
-
 
     <!--Title and breadcrum-->
 
@@ -79,6 +77,7 @@
                                             Personal</b></h5>
                                     <hr class="my-1" width="700" size="2px">
                                 </div>
+                                
                                 <div class="col-sm-1 mt-2 text-center"></div>
                                 <div class="col-sm-3 mt-4 text-center">
                                     <img id="foto_img" src="../img/foto.png" style="width: 80%;" />
@@ -154,6 +153,7 @@
                                                         Básicos</b></h5>
                                                 <hr class="my-1" width="650" size="2px">
                                             </div>
+                                            <br><br><br>
                                             <label for="ciudad_exp" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Ciudad de expedición</label>
                                             <div class="col-sm-8 pb-3">
@@ -249,6 +249,7 @@
                                                         Generales</b></h5>
                                                 <hr class="my-1" width="650" size="2px">
                                             </div>
+                                            <br><br><br>
                                             <label for="ciudad_resid" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Ciudad de residencia</label>
                                             <div class="col-sm-8 pb-3">
@@ -266,6 +267,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <br><br><br>
                                             <label for="direccion" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Dirección</label>
                                             <div class="col-sm-8 pb-3">
@@ -327,6 +329,7 @@
                                                 </h5>
                                                 <hr class="my-1" width="650" size="2px">
                                             </div>
+                                            <br><br><br>
                                             <label for="nomapell_emrg" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Nombres y Apellidos</label>
                                             <div class="col-sm-8 pb-3">
@@ -909,11 +912,13 @@
     <!--Scripts-->
     @section('js')
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/select2.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/colaboradorDatosPersonales.js') }}"></script>
         <script>
             $(function() {
                 $('[data-toggle="tooltip"]').tooltip()
             })
-            $(document).ready(function(e) {
+            $(document).ready(function(e) {                
                 $('#foto').change(function() {
                     let reader = new FileReader();
                     reader.onload = (e) => {
