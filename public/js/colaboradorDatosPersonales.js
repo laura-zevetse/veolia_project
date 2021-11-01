@@ -48,3 +48,10 @@ $(document).ready(function(e) {
 function enabledTabs(idTab){
     $("#"+idTab).removeClass('disabled');
 }
+function calcularEdad(){
+    let dateFirst, dateLast, age;
+    dateFirst = $("#fecha_nacimiento").val().substring(0, 4);
+    dateLast = $("#fechaActual").val().substring(0, 4);
+    age = dateFirst - dateLast;
+    $("#edad").val(Math.abs(age));
+}

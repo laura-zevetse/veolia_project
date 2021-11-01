@@ -91,7 +91,7 @@ class PersonaController extends Controller
         $tipos_dot = TipoDotacion::all();
         $tipos_contr = TipoContrato::all();
         $uns_negoc = UnidadNegocio::all();
-
+        $fechaActual = date('Y-m-d');
 
         return view('persona.createPerson', compact(
             'ciudades',
@@ -116,7 +116,8 @@ class PersonaController extends Controller
             'sedes',
             'tipos_dot',
             'tipos_contr',
-            'uns_negoc'
+            'uns_negoc',
+            'fechaActual'
         ));
     }
 

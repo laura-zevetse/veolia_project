@@ -71,6 +71,7 @@
                         <form id="firstForm"  enctype="multipart/form-data" action="{{ route('persona.store') }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" id="fechaActual" value="{{$fechaActual}}">
                             <div class="row">
                                 <div class="container">
                                     <h5 class="my-2" style="font-size: medium; color: black;"><b>Información
@@ -212,7 +213,7 @@
                                             <div class="col-sm-8 pb-3">
                                                 <div class="input-group">
                                                     <input type="date" class="form-control" name="fecha_nacimiento"
-                                                        id="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}" />
+                                                        id="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}" onchange="calcularEdad();" />
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i
                                                                 class="far fa-calendar-alt text-lightblue"></i></span>
