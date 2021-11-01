@@ -375,13 +375,7 @@
                                                 style="color: #4b545c;">Nombre Colaborador</label>
                                             <div class="col-sm-8 pb-3">
                                                 <select type="text" class="form-control" name="id_persona"
-                                                    id="id_persona">
-                                                    <option value="">--Seleccionar</option>
-                                                    @foreach ($personas as $persona)
-                                                        <option value="{{ $persona['id_persona'] }}">
-                                                            {{ $persona['nombre'] }} {{ $persona['primer_apellido'] }}
-                                                            {{ $persona['segundo_apellido'] }}</option>
-                                                    @endforeach
+                                                    id="id_persona_two">
                                                 </select>
                                             </div>
                                             <div class="container">

@@ -149,4 +149,12 @@ class Persona extends Model
     {
         return $this->hasMany('App\Models\Archivo', 'id_persona', 'id_persona');
     }
+
+    /**
+     * Funcion que busca un registro por id
+     */
+    public function findData($id)
+    {
+        return static::find($id);
+    }
 }

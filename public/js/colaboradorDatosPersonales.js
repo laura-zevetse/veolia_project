@@ -19,6 +19,7 @@ $(document).ready(function(e) {
             type:'POST',
             data: data,
             success: function(data) {
+                console.log(data);
                 $("#errFormPersona").css({'display':'none'});
                 if(data.status){
                     Swal.fire({
@@ -27,11 +28,18 @@ $(document).ready(function(e) {
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    console.log(data.info.original);
+                    console.log(data.info.original.data.nombre);
+                    console.log(data.info.original.data.primer_apellido);
+                    let namePersona = data.info.original.data.nombre+' '+data.info.original.data.primer_apellido;
                     enabledTabs("menu2-tab");
-                    setTimeout(
-                        $("#menu2-tab").trigger("click"),
-                        3500
-                    );
+                    setTimeout("$('#menu2-tab').trigger('click')", 3500);
+                    let $option = $('<option />', {
+                        text: namePersona,
+                        value: data.info.original.data.id_persona,
+                    });
+                    $('#id_persona_two').prepend($option);
+                    debugger;
                 }
             },
             error: function(err){

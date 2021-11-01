@@ -150,8 +150,10 @@ class PersonaController extends Controller
                 $datosPersona['foto']=$nombre;
             }
             Persona::insert($datosPersona);
+            $dataPerson = $this->getDataPerson($request['id_persona']);
             $arrResponse['status'] = true;
             $arrResponse['message'] = 'Información guardada con éxito !';
+            $arrResponse['info'] = $dataPerson;
             return response()->json($arrResponse, 200);
         }
         if ($validator->fails())
@@ -286,19 +288,14 @@ class PersonaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function getDataPerson($id)
     {
-        //
+        $data = Persona::findData($id);
+        $arrResponse = array();
+        $arrResponse['status'] = true;
+        $arrResponse['msg'] = 'VERDADERO';
+        $arrResponse['data'] = $data;
+        return response()->json($arrResponse);    
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
