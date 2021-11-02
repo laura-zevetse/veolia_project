@@ -70,4 +70,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 Route::get('/welcome', [HomeController::class, 'index'])->name('welcome');
-Route::get('getpersona/{id}', 'PersonaController@getDataPerson')->name('get.persona');
+Route::get('getpersona/{id}', [PersonaController::class, 'getDataPerson'])->name('get.persona');

@@ -364,14 +364,14 @@
                     <!-------Content Menu2-forms------->
                     <div class="tab-pane fade" id="menu2" role="tabpanel">
 
-                        <form enctype="multipart/form-data" action="{{ route('persona.familiar') }}" method="POST">
+                        <form id="secondForm" enctype="multipart/form-data" action="{{ route('persona.familiar') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-2"></div>
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <div class="form-group row">
-                                            <label for="id_persona" class="col-sm-4 col-form-label pb-3"
+                                            <label for="id_persona_two" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Nombre Colaborador</label>
                                             <div class="col-sm-8 pb-3">
                                                 <select type="text" class="form-control" name="id_persona"
@@ -389,7 +389,7 @@
                                             <div class="col-sm-8 pb-3">
                                                 <select type="text" class="form-control" name="parentezco"
                                                     id="parentezco">
-                                                    <option value="">--Seleccionar</option>
+                                                    <option value="0">--Seleccionar</option>
                                                     @foreach ($parentezcos as $parentezco)
                                                         @if ($parentezco['id_parentezco'] == old('parentezco'))
                                                             <option value="{{ $parentezco['id_parentezco'] }}" selected>
@@ -401,41 +401,41 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <label for="apellidos_fliar" class="col-sm-4 col-form-label pb-3"
+                                            <label for="apellidos_fliar" class="col-sm-4 col-form-label pb-3 familia"
                                                 style="color: #4b545c;">Apellidos</label>
-                                            <div class="col-sm-8 pb-3">
+                                            <div class="col-sm-8 pb-3 familia">
                                                 <input type="text" class="form-control" name="apellidos_fliar"
                                                     id="apellidos_fliar" placeholder=""
                                                     onkeyup="this.value=this.value.toUpperCase()" />
                                             </div>
-                                            <label for="nombres_fliar" class="col-sm-4 col-form-label pb-3"
+                                            <label for="nombres_fliar" class="col-sm-4 col-form-label pb-3 familia"
                                                 style="color: #4b545c;">Nombres</label>
-                                            <div class="col-sm-8 pb-3">
+                                            <div class="col-sm-8 pb-3 familia">
                                                 <input type="text" class="form-control" name="nombres_fliar"
                                                     id="nombres_fliar" placeholder=""
                                                     onkeyup="this.value=this.value.toUpperCase()" />
                                             </div>
-                                            <label for="fecha_nacimiento" class="col-sm-4 col-form-label pb-3"
+                                            <label for="fecha_nacimiento" class="col-sm-4 col-form-label pb-3 familia"
                                                 style="color: #4b545c;">Fecha de nacimiento</label>
-                                            <div class="col-sm-8 pb-3">
+                                            <div class="col-sm-8 pb-3 familia">
                                                 <div class="input-group">
                                                     <input type="date" class="form-control" name="fecha_nac_fliar"
-                                                        id="fecha_nac_fliar" />
+                                                        id="fecha_nac_fliar" onchange="calcularEdadFamiliar();"/>
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i
                                                                 class="far fa-calendar-alt text-lightblue"></i></span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <label for="edad" class="col-sm-4 col-form-label pb-3"
+                                            <label for="edad" class="col-sm-4 col-form-label pb-3 familia"
                                                 style="color: #4b545c;">Edad</label>
-                                            <div class="col-sm-8 pb-3">
+                                            <div class="col-sm-8 pb-3 familia">
                                                 <input type="text" class="form-control" name="edad_fliar"
                                                     id="edad_fliar" />
                                             </div>
-                                            <label for="gen" class="col-sm-4 col-form-label pb-3"
+                                            <label for="gen" class="col-sm-4 col-form-label pb-3 familia"
                                                 style="color: #4b545c;">Sexo</label>
-                                            <div class="col-sm-8 pb-3">
+                                            <div class="col-sm-8 pb-3 familia">
                                                 <select type="" class="form-control" name="sexo_fliar" id="sexo_fliar">
                                                     <option value="">--Seleccionar</option>
                                                     @foreach ($sexos as $sexo)
@@ -446,7 +446,7 @@
                                             </div>
                                         </div>
                                         <button id="btnGuardarM2" type="submit"
-                                            class="btn btn-success float-right">Guardar</button>
+                                            class="btn btn-success float-right familia">Continuar >></button>
                                     </div>
                                 </div>
                             </div>
@@ -909,6 +909,7 @@
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/select2.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/colaboradorDatosPersonales.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/datosFamiliares.js') }}"></script>
         <script>
             $(function() {
                 $('[data-toggle="tooltip"]').tooltip()

@@ -124,7 +124,7 @@ class PersonaController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
+     * Funcion encargada de guardar data personal del cliente.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -136,7 +136,7 @@ class PersonaController extends Controller
             'foto' => 'image',
             'primer_apellido' => 'required|min:3|max:15',
             'nombre' => 'required',
-            'id_persona' => 'required|digits_between:7,15',
+            'id_persona' => 'required|digits_between:7,15|unique:persona',
             'ciudad_exp' => 'required',
             'email' => 'required|email|regex:/(.*)@veolia\.com$/i|',
             'fecha_nacimiento' => 'required'
@@ -166,10 +166,13 @@ class PersonaController extends Controller
     }
 
     public function familiar(Request $request)
-    {
+    {        
         $datosFamiliar = request()->except('_token');
         Familiar::insert($datosFamiliar);
-        return back();
+        return response()->json([
+            'status' => true,
+            'message' => 'Familiar registrado con exito'
+        ], 200);
     }
 
 
