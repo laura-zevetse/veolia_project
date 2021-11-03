@@ -7,6 +7,11 @@ function calcularEdadFamiliar(){
 }
 
 $("#parentezco").on('change', function(){
+    let $option = $('<option />', {
+        text: $("#nameColaborate").val(),
+        value: $("#idColaborate").val()
+    });
+    $('#id_person_three').prepend($option);
     if ($(this).val() != 4) {
         $(".familia").show();
     } else {
@@ -26,7 +31,7 @@ $("#parentezco").on('change', function(){
             showCancelButton: true,
             confirmButtonText: ' Sí ',
             cancelButtonText: ' No ',
-            reverseButtons: true
+            reverseButtons: false
           }).then((result) => {
             if (result.isConfirmed) {
               swalWithBootstrapButtons.fire(

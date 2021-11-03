@@ -38,8 +38,10 @@ $(document).ready(function(e) {
                         timer: 1500
                     });
                     let namePersona = data.info.original.data.nombre+' '+data.info.original.data.primer_apellido;
+                    $("#nameColaborate").val(namePersona);
+                    $("#idColaborate").val(data.info.original.data.id_persona);
                     enabledTabs("menu2-tab");
-                    setTimeout("$('#menu2-tab').trigger('click')", 3500);
+                    setTimeout("$('#menu2-tab').trigger('click')", 2500);
                     let $option = $('<option />', {
                         text: namePersona,
                         value: data.info.original.data.id_persona,

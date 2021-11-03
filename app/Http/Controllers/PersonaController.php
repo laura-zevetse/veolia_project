@@ -162,7 +162,6 @@ class PersonaController extends Controller
                 'errors' => $validator->getMessageBag()->toArray()
             ], 400);
         }
-        
     }
 
     public function familiar(Request $request)
@@ -175,16 +174,25 @@ class PersonaController extends Controller
         ], 200);
     }
 
-
     public function contrato(Request $request)
     {
-        $request->validate([
+        $arrResponse = array();
+        $validator = Validator::make($request->all(), [
             'tipo_contrato' => 'required'
         ]);
-
-        $datosContrato = request()->except('_token');
-        Contrato::insert($datosContrato);
-        return back();
+        if ($validator->passes()) {
+            $datosContrato = request()->except('_token');
+            Contrato::insert($datosContrato);
+            $arrResponse['status'] = true;
+            $arrResponse['message'] = 'Contrato generado con éxito !';
+            return response()->json($arrResponse, 200);
+        }
+        if ($validator->fails())
+        { 
+            return response()->json([
+                'errors' => $validator->getMessageBag()->toArray()
+            ], 400);
+        }
     }
 
     public function archivo(Request $request)

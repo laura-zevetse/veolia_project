@@ -72,6 +72,8 @@
                             enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" id="fechaActual" value="{{$fechaActual}}">
+                            <input type="hidden" id="nameColaborate" value="">
+                            <input type="hidden" id="idColaborate" value="">
                             <div class="row">
                                 <div class="container">
                                     <h5 class="my-2" style="font-size: medium; color: black;"><b>Información
@@ -457,6 +459,9 @@
 
                     <!-------Content Menu3-forms------->
                     <div class="tab-pane fade" id="menu3" role="tabpanel">
+                        <div id="errFormContrato" class="alert alert-danger print-error-msg" style="display:none">
+                            <ul></ul>
+                        </div>
                         <form enctype="multipart/form-data" action="{{ route('persona.contrato') }}" method="POST">
                             @csrf
                             <div class="row">
