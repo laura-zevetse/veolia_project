@@ -4,13 +4,22 @@ $(document).ready(function(e) {
     $("#menu4-tab").addClass('disabled');
     $("#menu5-tab").addClass('disabled');
     $("#menu6-tab").addClass('disabled');
+    $(".familia").hide();
     $("#ciudad_resid").select2();
     $("#ciudad_exp").select2();
     $("#tipo_sangre").select2();
     $("#educacion").select2();
     $("#estado_colab").select2();
     $("#sexo").select2();
-    $("#tipo_documento").select2();    
+    $("#tipo_contrato").select2();
+    $("#cargo").select2();
+    $("#area").select2();
+    $("#gerencia").select2();
+    $("#sede").select2();
+    $("#unidad_negocio").select2();
+    $("#estrategico").select2();
+    $("#centro_costo").select2();
+    $("#tipo_dotacion").select2();
     $("#btnGuardarM1").on('click', function(e){
         e.preventDefault();
         let data = $("#firstForm").serialize();

@@ -468,13 +468,7 @@
                                                 style="color: #4b545c;">Nombre Colaborador</label>
                                             <div class="col-sm-8 pb-3">
                                                 <select type="text" class="form-control" name="id_persona"
-                                                    id="id_persona">
-                                                    <option value="">--Seleccionar</option>
-                                                    @foreach ($personas as $persona)
-                                                        <option value="{{ $persona['id_persona'] }}">
-                                                            {{ $persona['nombre'] }} {{ $persona['primer_apellido'] }}
-                                                            {{ $persona['segundo_apellido'] }}</option>
-                                                    @endforeach
+                                                    id="id_person_three">
                                                 </select>
                                             </div>
                                             <div class="container">
@@ -487,7 +481,7 @@
                                                 style="color: #4b545c;">Tipo de
                                                 Contrato</label>
                                             <div class="col-sm-8 pb-3">
-                                                <select type="text" class="form-control" name="tipo_contrato"
+                                                <select type="text" class="form-control tab3" name="tipo_contrato"
                                                     id="tipo_contrato">
                                                     <option value="">--Seleccionar</option>
                                                     @foreach ($tipos_contr as $tipo_contrato)
@@ -553,7 +547,7 @@
                                             <label for="cargo" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Cargo</label>
                                             <div class="col-sm-8 pb-3">
-                                                <select type="text" class="form-control" name="cargo" id="cargo">
+                                                <select type="text" class="form-control tab3" name="cargo" id="cargo">
                                                     <option value="">--Seleccionar</option>
                                                     @foreach ($cargos as $cargo)
                                                         @if ($cargo['id_cargo'] == old('cargo'))
@@ -569,7 +563,7 @@
                                             <label for="area" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Área</label>
                                             <div class="col-sm-8 pb-3">
-                                                <select type="text" class="form-control" name="area" id="area">
+                                                <select type="text" class="form-control tab3" name="area" id="area">
                                                     <option value="">--Seleccionar</option>
                                                     @foreach ($areas as $area)
                                                         @if ($area['id_area'] == old('area'))
@@ -585,7 +579,7 @@
                                             <label for="gerencia" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Gerencia</label>
                                             <div class="col-sm-8 pb-3">
-                                                <select type="text" class="form-control" name="gerencia" id="gerencia">
+                                                <select type="text" class="form-control tab3" name="gerencia" id="gerencia">
                                                     <option value="">--Seleccionar</option>
                                                     @foreach ($gerencias as $gerencia)
                                                         @if ($gerencia['id_gerencia'] == old('gerencia'))
@@ -601,7 +595,7 @@
                                             <label for="sede" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Sede</label>
                                             <div class="col-sm-8 pb-3">
-                                                <select type="text" class="form-control" name="sede" id="sede">
+                                                <select type="text" class="form-control tab3" name="sede" id="sede">
                                                     <option value="">--Seleccionar</option>
                                                     @foreach ($sedes as $sede)
                                                         @if ($sede['id_sede'] == old('sede'))
@@ -623,7 +617,7 @@
                                                 style="color: #4b545c;">Unidad
                                                 de Negocio</label>
                                             <div class="col-sm-8 pb-3">
-                                                <select type="text" class="form-control" name="unidad_negocio"
+                                                <select type="text" class="form-control tab3" name="unidad_negocio"
                                                     id="unidad_negocio">
                                                     <option value="">--Seleccionar</option>
                                                     @foreach ($uns_negoc as $un_negoc)
@@ -640,7 +634,7 @@
                                             <label for="estrategico" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Estratégico</label>
                                             <div class="col-sm-8 pb-3">
-                                                <select type="text" class="form-control" name="estrategico"
+                                                <select type="text" class="form-control tab3" name="estrategico"
                                                     id="estrategico">
                                                     <option value="">--Seleccionar</option>
                                                     @foreach ($estrategicos as $estrategico)
@@ -659,7 +653,7 @@
                                                 style="color: #4b545c;">Centro
                                                 de Costo</label>
                                             <div class="col-sm-8 pb-3">
-                                                <select type="text" class="form-control" name="centro_costo"
+                                                <select type="text" class="form-control tab3" name="centro_costo"
                                                     id="centro_costo">
                                                     <option value="">--Seleccionar</option>
                                                     @foreach ($cents_costo as $cent_costo)
@@ -678,7 +672,7 @@
                                                 style="color: #4b545c;">Tipo de
                                                 Dotación</label>
                                             <div class="col-sm-8 pb-3">
-                                                <select type="text" class="form-control" name="tipo_dotacion"
+                                                <select type="text" class="form-control tab3" name="tipo_dotacion"
                                                     id="tipo_dotacion">
                                                     <option value="">--Seleccionar</option>
                                                     @foreach ($tipos_dot as $tipo_dot)
@@ -697,6 +691,8 @@
                                 </div>
                             </div>
                             <div class="col-2"></div>
+                            <button id="btnGuardarM3" type="submit"
+                                            class="btn btn-success float-right">Continuar >></button>
                     </div>
                     <!------/Content Menu3-forms------>
 
