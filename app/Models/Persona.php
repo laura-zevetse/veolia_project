@@ -157,4 +157,16 @@ class Persona extends Model
     {
         return static::find($id);
     }
+
+
+    public function findFamily($id)
+    {
+        $familia = DB::table('familiar as f')
+        ->select('f.id_persona','f.nombres_fliar', 'f.apellidos_fliar', 'f.apellidos_fliar', 'p.nombre_parentezco')
+        ->join('parentezco as p', 'p.id_parentezco', '=', 'f.parentezco')
+        ->where('f.id_person', '=', $id)
+        ->get();
+        return $familia;
+
+    }
 }

@@ -224,20 +224,16 @@ class PersonaController extends Controller
     public function edit($id_persona)
     {
         $persona = Persona::findOrFail($id_persona);
-        $contratos=$persona->contrato;
-        $familiares=$persona->familiar;
-
-       /* $familiares2 = DB::table('persona')
-            ->join('familiar', 'id_persona', '=', 'familiar.id_persona')
-            ->join('parentezco', 'id_parentezo', '=', 'familiar.id_parentezco')
-            ->select('familiar.*', 'parentezco.nombre_parentezco')
-            ->get();
-*/
+        $contratos = $persona->contrato;
+        $familiares = DB::table('familiar')
+        ->select('familiar.id_persona','familiar.nombres_fliar', 'familiar.apellidos_fliar', 'familiar.apellidos_fliar','familiar.id_familiar','familiar.edad_fliar','familiar.sexo_fliar', 'p.nombre_parentezco')
+        ->join('parentezco as p', 'p.id_parentezco', '=', 'familiar.parentezco')
+        ->where('familiar.id_persona', '=', $id_persona)
+        ->get()->toArray();
        // dd($familiares);
 
         $parentezcos = Parentezco::all();
         $sexos = Sexo::all();
-
         $ciudades = Ciudad::all();
         $educaciones = Educacion::all();
         $estados = EstadoColab::all();
@@ -260,7 +256,6 @@ class PersonaController extends Controller
         $tipos_dot = TipoDotacion::all();
         $tipos_contr = TipoContrato::all();
         $uns_negoc = UnidadNegocio::all();
-
 
 
         return view('persona.editPerson', $persona, compact(

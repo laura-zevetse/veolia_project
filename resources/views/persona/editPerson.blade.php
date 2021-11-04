@@ -383,38 +383,24 @@
                                                                                 <th>Nombre</th>
                                                                                 <th>Edad</th>
                                                                                 <th>Sexo</th>
-                                                                                <th>Acciones</th>
                                                                             </tr>
                                                                         </thead>
-
+                                                                     
+                                                            
                                                                         <tbody>
-                                                                            @foreach ((array) $familiares as $familiar)
-                                                                                <tr>
-                                                                                    <td>{{ $familiar->id_familiar }}</td>
-                                                                                    <td>
-                                                                                        @foreach ($parentezcos as $parentezco)
+                                                                            @forelse ($familiares as $value)
+                                                                            <tr>
+                                                                            <td>{{ $value->id_familiar }}</td>
+                                                                                <td>{{ $value->nombre_parentezco }}</td>
+                                                                                <td>{{ $value->apellidos_fliar }}</td>
+                                                                                <td>{{ $value->nombres_fliar }}</td>
+                                                                                <td>{{ $value->edad_fliar }}</td>
+                                                                                <td>{{ $value->sexo_fliar }}</td>
+                                                                            </tr>
+                                                                            @empty
+                                                                                <p>No users</p>
+                                                                            @endforelse
 
-                                                                                            @if ($parentezco->id_parentezco == $familiar->parentezco)
-                                                                                                {{ $parentezco['nombre_parentezco'] }}
-                                                                                            @endif
-                                                                                        @endforeach
-                                                                                    </td>
-                                                                                    <td id="column_apellidos_fliar">
-                                                                                        {{ $familiar->apellidos_fliar }}
-                                                                                    </td>
-                                                                                    <td id="column_nombres_fliar">
-                                                                                        {{ $familiar->nombres_fliar }}
-                                                                                    </td>
-                                                                                    <td id="column_edad_fliar">
-                                                                                        {{ $familiar->edad }}</td>
-                                                                                    <td id="column_sexo_fliar">
-                                                                                        {{ $familiar->sexo }}</td>
-                                                                                    <td> <a
-                                                                                            class="btnSelect">Editar</a>
-                                                                                        <p>eliminar</p>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            @endforeach
                                                                             <tr>
                                                                                 <td></td>
                                                                             </tr>
