@@ -462,7 +462,7 @@
                         <div id="errFormContrato" class="alert alert-danger print-error-msg" style="display:none">
                             <ul></ul>
                         </div>
-                        <form enctype="multipart/form-data" action="{{ route('persona.contrato') }}" method="POST">
+                        <form id="formThree" enctype="multipart/form-data" action="{{ route('persona.contrato') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-2"></div>
@@ -696,8 +696,8 @@
                                 </div>
                             </div>
                             <div class="col-2"></div>
-                            <button id="btnGuardarM3" type="submit"
-                                            class="btn btn-success float-right">Continuar >></button>
+                            <button id="btnGuardarM3" type="submit" class="btn btn-success float-right">Continuar >></button>
+                        </form>
                     </div>
                     <!------/Content Menu3-forms------>
 
@@ -845,7 +845,7 @@
                                 </div>
                             </div>
                         </div>
-                        </form>
+                        
                         <div class="col-2"></div>
                     </div>
                     <!-------/Content Menu5-forms------->

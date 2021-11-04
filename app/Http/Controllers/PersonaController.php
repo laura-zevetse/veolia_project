@@ -178,7 +178,8 @@ class PersonaController extends Controller
     {
         $arrResponse = array();
         $validator = Validator::make($request->all(), [
-            'tipo_contrato' => 'required'
+            'tipo_contrato' => 'required',
+            'id_persona' => 'required|digits_between:7,10'
         ]);
         if ($validator->passes()) {
             $datosContrato = request()->except('_token');
