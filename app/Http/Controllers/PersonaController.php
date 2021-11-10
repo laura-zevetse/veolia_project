@@ -195,6 +195,10 @@ class PersonaController extends Controller
         }
     }
 
+    /**
+     * metodo que guarda el contrato del colaborador
+     * Laura Estevez <3
+     */
     public function archivo(Request $request)
     {
         $documento = request()->except('_token');

@@ -78,3 +78,7 @@ $("#btnNext").on('click', function(){
     enabledTabs("menu5-tab");
     $('#menu5-tab').trigger('click')
 });
+$("#btnNextTwo").on('click', function(){
+    enabledTabs("menu4-tab");
+    $('#menu4-tab').trigger('click')
+});

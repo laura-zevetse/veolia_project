@@ -461,7 +461,7 @@
                         <div id="errFormContrato" class="alert alert-danger print-error-msg" style="display:none">
                             <ul></ul>
                         </div>
-                        <form id="formThree" enctype="multipart/form-data" action="{{ route('persona.contrato') }}" method="POST">
+                        <form id="formThree" enctype="multipart/form-data" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-2"></div>
@@ -690,6 +690,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <a id="btnNextTwo" class="btn btn-success float-right">Continuar</a>
                                         </div>
 
                                     </div>
@@ -741,7 +742,7 @@
                             </div>
                         </div>
                         <div class="col-2"></div>
-                        <button id="btnNext" type="submit" class="btn btn-success float-right">Continuar</button>
+                        <a id="btnNext" type="submit" class="btn btn-success float-right">Continuar</a>
                     </div>
                     <!------/Content Menu4-forms------->
 
@@ -862,14 +863,7 @@
                                                 style="color: #4b545c;">Nombre Colaborador</label>
                                             <div class="col-sm-8 pb-3">
                                                 <select type="text" class="form-control" name="id_persona"
-                                                    id="id_persona">
-                                                    <option value="">--Seleccionar</option>
-                                                    @foreach ($personas as $persona)
-                                                        <option value="{{ $persona['id_persona'] }}">
-                                                            {{ $persona['nombre'] }}
-                                                            {{ $persona['primer_apellido'] }}
-                                                            {{ $persona['segundo_apellido'] }}</option>
-                                                    @endforeach
+                                                    id="id_persona_file">
                                                 </select>
                                             </div>
                                             <section class="d-flex text-center">
@@ -882,9 +876,9 @@
                                                                 y/o documentación requerida del colaborador.
                                                                 <br><b>Únicamente en formato
                                                                     PDF.</b></label>
-                                                            <form action="../../form-result.php" method="post"
+                                                            <form method="post"
                                                                 enctype="multipart/form-data"
-                                                                action="{{ route('persona.archivo') }}" target="_blank">
+                                                                action="{{ route('persona.archivo') }}" id="uploadFile">
                                                                 <input type="file" name="soporte" id="soporte">
                                                                 <button id="btnGuardarM6" type="submit"
                                                                     class="btn btn-success btn-sm float-center">Cargar</button>
