@@ -17,7 +17,6 @@ use App\Http\Controllers\HomeController;
 | Here is where you can register web routes for your application.
 */
 
-
 Route::get('/persona', [PersonaController::class, 'listPerson'])->name('persona.list');
 
 Route::get('/persona/createPerson', [PersonaController::class, 'create'])->name('persona.create');
@@ -42,17 +41,9 @@ Route::put('/incapacidad/updIncap', [IncapacidadController::class, 'updateIncap'
 
 Route::get('/persona/search', [SearchController::class, 'idSearch'])->name('persona.busqueda');
 
-
-
-
 Route::get('/incapacidad', function () {
     return view('incapacidad.index');
 });
-
-
-
-
-
 
 /*Route::resource('persona', PersonaController::class);*/
 Auth::routes();
@@ -67,7 +58,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
-
-
-Route::get('/welcome', [HomeController::class, 'index'])->name('welcome');
 Route::get('getpersona/{id}', [PersonaController::class, 'getDataPerson'])->name('get.persona');

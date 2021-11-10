@@ -149,6 +149,8 @@ return [
     */
 
     'attributes' => [
+        'ciudad_exp'=> 'ciudad de expedición',
+        'email'=>'correo electrónico'
     ],
 
 

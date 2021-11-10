@@ -32,7 +32,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class PersonaController extends Controller
 {
@@ -133,7 +133,6 @@ class PersonaController extends Controller
     {
         $arrResponse = array();
     	$validator = Validator::make($request->all(), [
-            'foto' => 'image',
             'primer_apellido' => 'required|min:3|max:15',
             'nombre' => 'required',
             'id_persona' => 'required|digits_between:7,15|unique:persona',
@@ -141,7 +140,7 @@ class PersonaController extends Controller
             'email' => 'required|email|regex:/(.*)@veolia\.com$/i|',
             'fecha_nacimiento' => 'required'
         ]);
-        if ($validator->passes()) 
+        if ($validator->passes())
         {
             $datosPersona = request()->except('_token');
             if($archivo=$request->file('foto')){
@@ -152,12 +151,12 @@ class PersonaController extends Controller
             Persona::insert($datosPersona);
             $dataPerson = $this->getDataPerson($request['id_persona']);
             $arrResponse['status'] = true;
-            $arrResponse['message'] = 'Información guardada con éxito !';
+            $arrResponse['message'] = 'Información guardada con éxito!';
             $arrResponse['info'] = $dataPerson;
             return response()->json($arrResponse, 200);
         }
         if ($validator->fails())
-        { 
+        {
             return response()->json([
                 'errors' => $validator->getMessageBag()->toArray()
             ], 400);
@@ -165,7 +164,7 @@ class PersonaController extends Controller
     }
 
     public function familiar(Request $request)
-    {        
+    {
         $datosFamiliar = request()->except('_token');
         Familiar::insert($datosFamiliar);
         return response()->json([
@@ -189,7 +188,7 @@ class PersonaController extends Controller
             return response()->json($arrResponse, 200);
         }
         if ($validator->fails())
-        { 
+        {
             return response()->json([
                 'errors' => $validator->getMessageBag()->toArray()
             ], 400);
@@ -302,7 +301,7 @@ class PersonaController extends Controller
         $arrResponse['status'] = true;
         $arrResponse['msg'] = 'VERDADERO';
         $arrResponse['data'] = $data;
-        return response()->json($arrResponse);    
+        return response()->json($arrResponse);
     }
 
 }

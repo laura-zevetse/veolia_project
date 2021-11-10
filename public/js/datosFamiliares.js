@@ -23,10 +23,10 @@ $("#parentezco").on('change', function(){
             },
             buttonsStyling: false
           })
-          
+
           swalWithBootstrapButtons.fire({
-            title: 'Desea continuar ?',
-            text: "continuar con el registro de informaciòn laboral.",
+            title: '¿Desea continuar?',
+            text: "Continuar con el registro de información laboral.",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: ' Sí ',
@@ -35,13 +35,13 @@ $("#parentezco").on('change', function(){
           }).then((result) => {
             if (result.isConfirmed) {
               swalWithBootstrapButtons.fire(
-                'Cargando ...',
+                'Cargando...',
                 'success'
               );
             } else if (result.dismiss === Swal.DismissReason.cancel) {
               swalWithBootstrapButtons.fire(
                 'Complete el formulario',
-                'Gracias !',
+                'Gracias!',
               );
             }
             if (result.dismiss === Swal.DismissReason.cancel) {
@@ -52,7 +52,7 @@ $("#parentezco").on('change', function(){
               }
         });
 
-    }    
+    }
 });
 
 $("#btnGuardarM2").on('click', function(e){
@@ -86,7 +86,6 @@ $("#btnGuardarM2").on('click', function(e){
     });
 });
 
-
 $("#btnGuardarM3").on('click', function(e){
   e.preventDefault();
   let data = $("#formThree").serialize();
@@ -108,7 +107,7 @@ $("#btnGuardarM3").on('click', function(e){
           setTimeout("$('#menu4-tab').trigger('click')", 3500);
       },
       error: function(err){
-          console.error("tenemos inconvenientes");
+          console.error("Tenemos Inconvenientes");
           $("#errFormContrato").find("ul").html('');
           $("#errFormContrato").css('display','block');
           var obj = JSON.parse(err.responseText);

@@ -1,11 +1,13 @@
 @extends('layouts.master')
-
-@section('css')
-    <!--Styles-->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-@endsection
-
 @section('content')
+<!--Styles CSS-->
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+<link rel="stylesheet" href="{{ asset('css/select2.css') }}">
+<!-- Script -->
+<script src="//code.jquery.com/jquery-3.5.1.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+
     <!--Title and breadcrum-->
     <section class="content-header">
         <div class="container-fluid">
@@ -136,7 +138,7 @@
 @endsection
 <!--Scripts-->
 @section('js')
-    <script type="text/javascript" src="{{ asset('js/app.js') }}">
-
-    </script>
+    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/select2.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/incapacidadesDatos.js') }}"></script>
 @endsection

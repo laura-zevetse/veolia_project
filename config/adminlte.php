@@ -226,7 +226,7 @@ return [
 
     'menu' => [
         // Navbar items:
-        ['header' => 'account_settings'],
+        ['header' => 'ADMINISTRAR'],
         /*[
             'text' => 'profile',
             'url'  => 'admin/settings',

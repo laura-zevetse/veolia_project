@@ -20,6 +20,7 @@ $(document).ready(function(e) {
     $("#estrategico").select2();
     $("#centro_costo").select2();
     $("#tipo_dotacion").select2();
+
     $("#btnGuardarM1").on('click', function(e){
         e.preventDefault();
         let data = $("#firstForm").serialize();
@@ -54,7 +55,7 @@ $(document).ready(function(e) {
                 $(".print-error-msg").css('display','block');
                 var obj = JSON.parse(err.responseText);
                 Object.entries(obj.errors).forEach(([key, value]) => {
-                        $(".print-error-msg").find("ul").append('<li>'+value.toString().replace('id persona', 'Número de documento')+'</li>');
+                        $(".print-error-msg").find("ul").append('<li>'+value.toString().replace('id persona', 'número de documento')+'</li>');
                 });
             }
         });
@@ -70,3 +71,10 @@ function calcularEdad(){
     age = dateFirst - dateLast;
     $("#edad").val(Math.abs(age));
 }
+
+
+
+$("#btnNext").on('click', function(){
+    enabledTabs("menu5-tab");
+    $('#menu5-tab').trigger('click')
+});

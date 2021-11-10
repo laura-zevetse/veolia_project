@@ -7,7 +7,6 @@
     <!-- Script -->
     <script src="//code.jquery.com/jquery-3.5.1.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
     <script type="text/javascript" src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
 
     <!--Title and breadcrum-->
@@ -80,7 +79,7 @@
                                             Personal</b></h5>
                                     <hr class="my-1" width="700" size="2px">
                                 </div>
-                                
+
                                 <div class="col-sm-1 mt-2 text-center"></div>
                                 <div class="col-sm-3 mt-4 text-center">
                                     <img id="foto_img" src="../img/foto.png" style="width: 80%;" />
@@ -448,7 +447,7 @@
                                             </div>
                                         </div>
                                         <button id="btnGuardarM2" type="submit"
-                                            class="btn btn-success float-right familia">Continuar >></button>
+                                            class="btn btn-success float-right familia">Continuar</button>
                                     </div>
                                 </div>
                             </div>
@@ -692,12 +691,10 @@
                                                 </select>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-2"></div>
-                            <button id="btnGuardarM3" type="submit" class="btn btn-success float-right">Continuar >></button>
-                        </form>
                     </div>
                     <!------/Content Menu3-forms------>
 
@@ -744,6 +741,7 @@
                             </div>
                         </div>
                         <div class="col-2"></div>
+                        <button id="btnNext" type="submit" class="btn btn-success float-right">Continuar</button>
                     </div>
                     <!------/Content Menu4-forms------->
 
@@ -840,12 +838,13 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <button id="btnGuardarM5" type="submit"
-                                        class="btn btn-success float-right">Guardar</button>
+                                    <!--<button id="btnGuardarM5" type="submit"
+                                        class="btn btn-success float-right">Guardar</button>-->
+                                    <button id="btnGuardarM3" type="submit" class="btn btn-success float-right">Continuar</button>
                                 </div>
                             </div>
                         </div>
-                        
+                    </form>
                         <div class="col-2"></div>
                     </div>
                     <!-------/Content Menu5-forms------->
@@ -915,14 +914,14 @@
             $(function() {
                 $('[data-toggle="tooltip"]').tooltip()
             })
-            $(document).ready(function(e) {                
+            $(document).ready(function(e) {
                 $('#foto').change(function() {
                     let reader = new FileReader();
                     reader.onload = (e) => {
                         $('#foto_img').attr('src', e.target.result);
                     }
                     reader.readAsDataURL(this.files[0]);
-                });     
+                });
             });
         </script>
     @endsection
