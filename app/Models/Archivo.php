@@ -30,7 +30,7 @@ class Archivo extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_persona', 'soporte', 'observaciones'];
+    protected $fillable = ['id_persona', 'soporte', 'soporte'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

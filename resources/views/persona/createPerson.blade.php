@@ -67,8 +67,7 @@
                         <div id="errFormPersona" class="alert alert-danger print-error-msg" style="display:none">
                             <ul></ul>
                         </div>
-                        <form id="firstForm"  enctype="multipart/form-data" action="{{ route('persona.store') }}" method="POST"
-                            enctype="multipart/form-data">
+                        <form method="POST" id="upload-image-form" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" id="fechaActual" value="{{$fechaActual}}">
                             <input type="hidden" id="nameColaborate" value="">
@@ -83,8 +82,8 @@
                                 <div class="col-sm-1 mt-2 text-center"></div>
                                 <div class="col-sm-3 mt-4 text-center">
                                     <img id="foto_img" src="../img/foto.png" style="width: 80%;" />
-                                    <input class="form-control mt-3" id="foto" name="foto" type="file"
-                                        placeholder="Elija la foto del colaborador" accept="image/*" />
+                
+                                    <input class="form-control mt-3" type="file" name="foto" class="form-control" id="image-input" placeholder="Elija la foto del colaborador" accept="image/*">
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="card-body">
@@ -352,7 +351,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" id="btnGuardarM1"
+                                        <button type="submit"
                                             class="btn btn-success float-right">Continuar</button>
                                     </div>
                                 </div>

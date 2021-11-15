@@ -33,6 +33,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+
 
 class PersonaController extends Controller
 {
@@ -129,8 +131,9 @@ class PersonaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    /*public function store(Request $request)
     {
+
         $arrResponse = array();
     	$validator = Validator::make($request->all(), [
             'primer_apellido' => 'required|min:3|max:15',
@@ -143,12 +146,15 @@ class PersonaController extends Controller
         if ($validator->passes())
         {
             $datosPersona = request()->except('_token');
-            if($archivo=$request->file('foto')){
+            $archivo = $request->file('foto');
+            /*if(){
+                dd($archivo);
                 $nombre=$archivo->getClientOriginalName();
                 $archivo->move('img', $nombre);
                 $datosPersona['foto']=$nombre;
-            }
-            Persona::insert($datosPersona);
+            }*/
+
+           /* Persona::insert($datosPersona);
             $dataPerson = $this->getDataPerson($request['id_persona']);
             $arrResponse['status'] = true;
             $arrResponse['message'] = 'Información guardada con éxito!';
@@ -160,7 +166,40 @@ class PersonaController extends Controller
             return response()->json([
                 'errors' => $validator->getMessageBag()->toArray()
             ], 400);
+        }*/
+    /*}*/
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'primer_apellido' => 'required|min:3|max:15',
+            'nombre' => 'required',
+            'id_persona' => 'required|digits_between:7,16|unique:persona',
+            //'ciudad_exp' => 'required',
+            'email' => 'required|email|regex:/(.*)@veolia\.com$/i|',
+            //'fecha_nacimiento' => 'required',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        $persona = new Persona;
+        $datosPersona = request()->except('_token');
+        $archivo = $request->file('foto');
+        if ($archivo) {
+            $imagePath = $request->file('foto');
+            $imageName = $imagePath->getClientOriginalName();
+            $path = $request->file('foto')->storeAs('img', $imageName, 'public');
+            $persona->foto = '/storage/'.$path;
         }
+        $persona->primer_apellido = $request->primer_apellido;
+        $persona->id_persona = $request->id_persona;
+        $persona->nombre = $request->nombre;
+        $persona->email = $request->email;
+        $persona->save();
+        $dataPerson = $this->getDataPerson($request['id_persona']);
+        $arrResponse['status'] = true;
+        $arrResponse['message'] = 'Información guardada con éxito!';
+        $arrResponse['info'] = $dataPerson;
+        return response()->json($arrResponse, 200);
     }
 
     public function familiar(Request $request)
@@ -178,7 +217,7 @@ class PersonaController extends Controller
         $arrResponse = array();
         $validator = Validator::make($request->all(), [
             'tipo_contrato' => 'required',
-            'id_persona' => 'required|digits_between:7,10'
+            'id_persona' => 'required|digits_between:7,16'
         ]);
         if ($validator->passes()) {
             $datosContrato = request()->except('_token');
@@ -197,13 +236,17 @@ class PersonaController extends Controller
 
     /**
      * metodo que guarda el contrato del colaborador
-     * Laura Estevez <3
      */
     public function archivo(Request $request)
     {
-        $documento = request()->except('_token');
-        Archivo::insert($documento);
-        return back();
+        
+        request()->validate([
+            'soporte'  => 'required|mimes:pdf|max:2048' 
+        ]);
+
+
+
+
     }
 
 
