@@ -457,7 +457,7 @@
 
                     <!-------Content Menu3-forms------->
                     <div class="tab-pane fade" id="menu3" role="tabpanel">
-                        <div id="errFormContrato" class="alert alert-danger print-error-msg" style="display:none">
+                        <div id="errFormContrato" class="alert alert-danger print-error-msg-contrato" style="display:none">
                             <ul></ul>
                         </div>
                         <form id="formThree" enctype="multipart/form-data" method="POST">

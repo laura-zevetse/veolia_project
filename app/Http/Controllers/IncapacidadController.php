@@ -62,16 +62,51 @@ class IncapacidadController extends Controller
     public function storeIncap(Request $request)
     {
         $request->validate([
-            'id_contrato' => 'required',
-            'id_tipo_incapacidad' => 'required',
-            'id_eps' => 'required',
-            'fecha_inicio' => 'required',
+
             'soporte' => 'required'
         ]);
 
         $datosIncap = request()->except('_token');
         Incapacidad::insert($datosIncap);
         return back();
+
+        $arrResponse = array();
+        $validator = Validator::make($request->all(), [
+            'id_contrato' => 'required',
+            'id_tipo_incapacidad' => 'required',
+            'id_eps' => 'required',
+            'fecha_inicio' => 'required',
+            'soporte' => 'mimes:pdf|max:2048'
+        ]);
+        $incapacidad = new Incapacidad;
+        $archivo = $request->file('soporte');
+        if ($archivo) {
+            $imagePath = $request->file('soporte');
+            $pdfName = $imagePath->getClientOriginalName();
+            $path = $request->file('soporte')->storeAs('img', $pdfName, 'public');
+            $incapacidad->foto = '/storage/'.$path;
+        }
+        if ($validator->passes())
+        {
+            $incapacidad->id_contrato = $request->id_contrato;
+            $incapacidad->id_tipo_incapacidad = $request->id_tipo_incapacidad;
+            $incapacidad->id_eps = $request->id_eps;
+            $incapacidad->fecha_inicio = $request->fecha_inicio;
+            $incapacidad->save();
+            $arrResponse['status'] = true;
+            $arrResponse['message'] = 'Información guardada con éxito!';
+            return response()->json($arrResponse, 200);
+        }
+
+        if ($validator->fails())
+        {
+            return response()->json([
+                'errors' => $validator->getMessageBag()->toArray()
+            ], 400);
+        }
+
+
+
     }
 
     /**

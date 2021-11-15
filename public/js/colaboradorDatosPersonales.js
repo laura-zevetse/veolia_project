@@ -20,8 +20,6 @@ $(document).ready(function(e) {
     $("#estrategico").select2();
     $("#centro_costo").select2();
     $("#tipo_dotacion").select2();
-
-
     $('#upload-image-form').submit(function(e) {
         e.preventDefault();
         let formData = new FormData(this);
@@ -67,24 +65,16 @@ $(document).ready(function(e) {
                 });
             }
         });
- 
    });
 
     $("#btnGuardarM1").on('click', function(e){
         e.preventDefault();
-
-        
-        let data = $("#firstForm").serialize();
-
-
-
-        
+        let data = $("#firstForm").serialize();      
         $.ajax({
             url: "createPerson",
             type:'POST',
             data: data,
             success: function(data) {
-                console.log(data);
                 $("#errFormPersona").css({'display':'none'});
                 if(data.status){
                     Swal.fire({
@@ -114,19 +104,13 @@ $(document).ready(function(e) {
                 });
             }
         });
-        
-        
-        
-        
     });
 });
-
-
-
 
 function enabledTabs(idTab){
     $("#"+idTab).removeClass('disabled');
 }
+
 function calcularEdad(){
     let dateFirst, dateLast, age;
     dateFirst = $("#fecha_nacimiento").val().substring(0, 4);
@@ -135,12 +119,11 @@ function calcularEdad(){
     $("#edad").val(Math.abs(age)+' años');
 }
 
-
-
 $("#btnNext").on('click', function(){
     enabledTabs("menu5-tab");
     $('#menu5-tab').trigger('click')
 });
+
 $("#btnNextTwo").on('click', function(){
     enabledTabs("menu4-tab");
     $('#menu4-tab').trigger('click')

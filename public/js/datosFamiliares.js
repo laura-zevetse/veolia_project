@@ -125,7 +125,6 @@ $("#btnGuardarM3").on('click', function(e){
 
 
   $("#btnGuardarM6").on('click', function(e){
-    debugger;
     e.preventDefault();
     $.ajax({
       headers: {

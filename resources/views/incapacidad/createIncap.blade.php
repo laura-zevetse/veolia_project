@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-md-8">
-                    <form enctype="multipart/form-data" action="{{ route('incapacidad.store') }}" method="POST">
+                    <form enctype="multipart/form-data" method="POST" id="formularioIncapacidad">
                         @csrf
                         <div class="card-body">
                             <div class="form-group row">
@@ -125,7 +125,7 @@
                                         rows="4"></textarea>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success float-right">Guardar</button>
+                            <button type="submit" class="btn btn-success float-right" id="btnIncapacidad">Guardar</button>
                         </div>
                     </form>
                 </div>
