@@ -171,7 +171,8 @@ class PersonaController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $arrResponse = array();
+        $validator = Validator::make($request->all(), [
             'primer_apellido' => 'required|min:3|max:15',
             'nombre' => 'required',
             'id_persona' => 'required|digits_between:7,16|unique:persona',
@@ -180,9 +181,7 @@ class PersonaController extends Controller
             //'fecha_nacimiento' => 'required',
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-
         $persona = new Persona;
-        $datosPersona = request()->except('_token');
         $archivo = $request->file('foto');
         if ($archivo) {
             $imagePath = $request->file('foto');
@@ -190,16 +189,26 @@ class PersonaController extends Controller
             $path = $request->file('foto')->storeAs('img', $imageName, 'public');
             $persona->foto = '/storage/'.$path;
         }
-        $persona->primer_apellido = $request->primer_apellido;
-        $persona->id_persona = $request->id_persona;
-        $persona->nombre = $request->nombre;
-        $persona->email = $request->email;
-        $persona->save();
-        $dataPerson = $this->getDataPerson($request['id_persona']);
-        $arrResponse['status'] = true;
-        $arrResponse['message'] = 'Información guardada con éxito!';
-        $arrResponse['info'] = $dataPerson;
-        return response()->json($arrResponse, 200);
+        if ($validator->passes())
+        {
+            $persona->primer_apellido = $request->primer_apellido;
+            $persona->id_persona = $request->id_persona;
+            $persona->nombre = $request->nombre;
+            $persona->email = $request->email;
+            $persona->save();
+            $dataPerson = $this->getDataPerson($request['id_persona']);
+            $arrResponse['status'] = true;
+            $arrResponse['message'] = 'Información guardada con éxito!';
+            $arrResponse['info'] = $dataPerson;
+            return response()->json($arrResponse, 200);
+        }
+
+        if ($validator->fails())
+        {
+            return response()->json([
+                'errors' => $validator->getMessageBag()->toArray()
+            ], 400);
+        }
     }
 
     public function familiar(Request $request)

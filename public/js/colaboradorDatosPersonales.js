@@ -58,9 +58,13 @@ $(document).ready(function(e) {
                     $('#id_persona_two').prepend($option);
                 }
             },
-            error: function(response){
-               console.log(response);
-                 $('#image-input-error').text(response.responseJSON.errors.file);
+            error: function(err){
+                $(".print-error-msg").find("ul").html('');
+                $(".print-error-msg").css('display','block');
+                var obj = JSON.parse(err.responseText);
+                Object.entries(obj.errors).forEach(([key, value]) => {
+                    $(".print-error-msg").find("ul").append('<li>'+value.toString().replace('id persona', 'número de documento')+'</li>');
+                });
             }
         });
  
