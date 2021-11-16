@@ -125,7 +125,7 @@
                                         rows="4"></textarea>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success float-right" id="btnIncapacidad">Guardar</button>
+                            <button type="submit" class="btn btn-success float-right" >Guardar</button>
                         </div>
                     </form>
                 </div>

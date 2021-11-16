@@ -23,6 +23,7 @@ class Incapacidad extends Model
      * @var string
      */
     protected $table = 'incapacidad';
+    protected $primaryKey = 'id_incapacidad';
 
     /**
      * @var array

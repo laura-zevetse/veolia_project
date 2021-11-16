@@ -2,15 +2,21 @@ $(document).ready(function(e) {
     $("#id_contrato").select2();
     $("#id_tipo_incapacidad").select2();
     $("#eps").select2();
-    alert(1);
-    $("#btnIncapacidad").on('click', function(e){
+    $('#formularioIncapacidad').submit(function(e) {
         e.preventDefault();
-        let data = $("#formularioIncapacidad").serialize();
+        let formPdf = new FormData(this);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $.ajax({
-            url: "createIncap",
             type:'POST',
-            data: data,
-            success: function(data) {
+            url: "createIncap",
+            data: formPdf,
+            contentType: false,
+            processData: false,
+            success: (data) => {
                 if(data.status){
                     Swal.fire({
                         icon: 'success',
@@ -18,8 +24,6 @@ $(document).ready(function(e) {
                         showConfirmButton: false,
                         timer: 1500
                     });
-           
-                    
                 }
             },
             error: function(err){
@@ -31,7 +35,5 @@ $(document).ready(function(e) {
                 });
             }
         });
-
-        
-    });
+   });
 });
