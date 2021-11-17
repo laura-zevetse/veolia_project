@@ -27,10 +27,12 @@ class Archivo extends Model
      */
     protected $primaryKey = 'id_archivo';
 
+    public $timestamps = false;
+
     /**
      * @var array
      */
-    protected $fillable = ['id_persona', 'soporte', 'soporte'];
+    protected $fillable = ['id_persona', 'soporte'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

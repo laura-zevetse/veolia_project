@@ -851,7 +851,7 @@
 
                     <!-------Content Menu6-forms------->
                     <div class="tab-pane fade show" id="menu6" role="tabpanel">
-                        <form enctype="multipart/form-data" action="{{ route('persona.archivo') }}" method="POST">
+                        <form enctype="multipart/form-data" method="POST" id="formArchivo">
                             @csrf
                             <div class="row">
                                 <div class="col-2"></div>
@@ -875,24 +875,22 @@
                                                                 y/o documentación requerida del colaborador.
                                                                 <br><b>Únicamente en formato
                                                                     PDF.</b></label>
-                                                            <form method="post"
-                                                                enctype="multipart/form-data"
-                                                                action="{{ route('persona.archivo') }}" id="uploadFile">
+                                                         
                                                                 <input type="file" name="soporte" id="soporte">
-                                                                <button id="btnGuardarM6" type="submit"
+                                                                <button type="submit"
                                                                     class="btn btn-success btn-sm float-center">Cargar</button>
-                                                            </form>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </section>
                                                 </div>
-                                            </section>
+                                            </div>
                                         </div>
                                     </div>
+                                    <!-------/Content Menu6-forms------>
                                 </div>
                             </div>
-                            <!-------/Content Menu6-forms------>
-                    </div>
-                </div>
+                        </form>
             </div>
         </div>
         <!--Menu-Navbar y Content Menu-forms-->

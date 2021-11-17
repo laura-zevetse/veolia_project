@@ -124,39 +124,40 @@ $("#btnGuardarM3").on('click', function(e){
 });
 
 
-  $("#btnGuardarM6").on('click', function(e){
+  $("#formArchivo").submit(function(e){
     e.preventDefault();
-    $.ajax({
+    let formFile = new FormData(this);
+    $.ajaxSetup({
       headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      url: "createArchivo",
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
       type:'POST',
-      data: {
-        'id_persona' : $("#id_persona_file").val(),
-        'soporte': $("#soporte").val()
-      },
-      success: function(data) {
-          $("#errFormPersona").css({'display':'none'});
-          if(data.status){
-              Swal.fire({
-                  icon: 'success',
-                  title: data.message,
-                  showConfirmButton: false,
-                  timer: 1500
-              });
-          }
+      url: "createArchivo",
+      data: formFile,
+      contentType: false,
+      processData: false,
+      success: (data) => {
+        if(data.status){
+            Swal.fire({
+                icon: 'success',
+                title: data.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
       },
       error: function(err){
-          console.error("Tenemos Inconvenientes");
-          $("#errFormContrato").find("ul").html('');
-          $("#errFormContrato").css('display','block');
-          var obj = JSON.parse(err.responseText);
-          Object.entries(obj.errors).forEach(([key, value]) => {
-                  $("#errFormContrato").find("ul").append('<li>'+value.toString().replace('id persona', 'Número de documento')+'</li>');
-          });
-      }
+        console.error(err);
+        /*$(".print-error-msg").find("ul").html('');
+        $(".print-error-msg").css('display','block');
+        var obj = JSON.parse(err.responseText);
+        Object.entries(obj.errors).forEach(([key, value]) => {
+            $(".print-error-msg").find("ul").append('<li>'+value.toString().replace('id persona', 'número de documento')+'</li>');
+        });*/
+    }
   });
 
-  $("#")
+
 });

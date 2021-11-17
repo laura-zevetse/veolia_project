@@ -131,43 +131,6 @@ class PersonaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    /*public function store(Request $request)
-    {
-
-        $arrResponse = array();
-    	$validator = Validator::make($request->all(), [
-            'primer_apellido' => 'required|min:3|max:15',
-            'nombre' => 'required',
-            'id_persona' => 'required|digits_between:7,15|unique:persona',
-            'ciudad_exp' => 'required',
-            'email' => 'required|email|regex:/(.*)@veolia\.com$/i|',
-            'fecha_nacimiento' => 'required'
-        ]);
-        if ($validator->passes())
-        {
-            $datosPersona = request()->except('_token');
-            $archivo = $request->file('foto');
-            /*if(){
-                dd($archivo);
-                $nombre=$archivo->getClientOriginalName();
-                $archivo->move('img', $nombre);
-                $datosPersona['foto']=$nombre;
-            }*/
-
-           /* Persona::insert($datosPersona);
-            $dataPerson = $this->getDataPerson($request['id_persona']);
-            $arrResponse['status'] = true;
-            $arrResponse['message'] = 'Información guardada con éxito!';
-            $arrResponse['info'] = $dataPerson;
-            return response()->json($arrResponse, 200);
-        }
-        if ($validator->fails())
-        {
-            return response()->json([
-                'errors' => $validator->getMessageBag()->toArray()
-            ], 400);
-        }*/
-    /*}*/
 
     public function store(Request $request)
     {
@@ -248,13 +211,34 @@ class PersonaController extends Controller
      */
     public function archivo(Request $request)
     {
-        
-        request()->validate([
-            'soporte'  => 'required|mimes:pdf|max:2048' 
+        $arrResponse = array();
+        $validator = Validator::make($request->all(), [
+            'id_persona' => 'required',
+            'soporte' => 'mimes:pdf|max:2048'
         ]);
+        $archivo = new Archivo;
+        $file = $request->file('soporte');
+        if ($file) {
+            $imagePath = $request->file('soporte');
+            $pdfName = $imagePath->getClientOriginalName();
+            $path = $request->file('soporte')->storeAs('img', $pdfName, 'public');
+            $archivo->soporte = '/storage/'.$path;
+        }
+        if ($validator->passes())
+        {
+            $archivo->id_persona = $request->id_persona;
+            $archivo->save();
+            $arrResponse['status'] = true;
+            $arrResponse['message'] = 'Archivo guardado con éxito!';
+            return response()->json($arrResponse, 200);
+        }
 
-
-
+        if ($validator->fails())
+        {
+            return response()->json([
+                'errors' => $validator->getMessageBag()->toArray()
+            ], 400);
+        }
 
     }
 
