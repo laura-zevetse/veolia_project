@@ -13,12 +13,12 @@
         <div class="container-fluid">
             <div class="row mt-2">
                 <div class="col-sm-4">
-                    <h4><i class="fas fa-fw fa-file-medical-alt" style="margin-right: 14px;"></i>Añadir Incapacidades
-                    </h4>
+                    <h2><i class="fas fa-fw fa-file-medical-alt" style="margin-right: 8px;"></i>Añadir Incapacidades
+                    </h2>
                 </div>
                 <div class="col-sm-8">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Inicio</a></li>
                         <li class="breadcrumb-item"><a href="/incapacidad">Incapacidades</a></li>
                         <li class="breadcrumb-item">Añadir Incapacidad</li>
                     </ol>

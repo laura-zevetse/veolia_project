@@ -22,6 +22,8 @@ Route::get('/persona', [PersonaController::class, 'listPerson'])->name('persona.
 Route::get('/persona/createPerson', [PersonaController::class, 'create'])->name('persona.create');
 Route::post('/persona/createPerson', [PersonaController::class, 'store'])->name('persona.store');
 
+Route::put('/persona/updatePerson', [PersonaController::class, 'updatePerson'])->name('persona.update');
+
 Route::post('/persona/createFamiliar', [PersonaController::class, 'familiar'])->name('persona.familiar');
 
 Route::post('/persona/createContrato', [PersonaController::class, 'contrato'])->name('persona.contrato');
@@ -29,7 +31,6 @@ Route::post('/persona/createContrato', [PersonaController::class, 'contrato'])->
 Route::post('/persona/createArchivo', [PersonaController::class, 'archivo'])->name('persona.archivo');
 
 Route::get('/persona/editPerson/{id_persona}', [PersonaController::class, 'edit'])->name('persona.edit');
-Route::put('/persona/updPerson', [PersonaController::class, 'update'])->name('persona.update');
 
 Route::get('/incapacidad', [IncapacidadController::class, 'listIncap'])->name('incapacidad.list');
 
@@ -47,7 +48,6 @@ Route::get('/incapacidad', function () {
 
 /*Route::resource('persona', PersonaController::class);*/
 Auth::routes();
-
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
     return view('auth.login');

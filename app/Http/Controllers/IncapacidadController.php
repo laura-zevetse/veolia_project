@@ -21,14 +21,13 @@ class IncapacidadController extends Controller
      */
     public function listIncap(Request $request)
     {
-        $personas = Persona::all();
-        $incapacidades = Incapacidad::all();
-        $tiposIncapacidad = TipoIncapacidad::all();
 
         $listar = DB::select('select c.id_persona, a.fecha_inicio, a.fecha_final, d.nombre_eps, e.nombre_tipo_incapac
         from incapacidad a, contrato b, persona c, eps d, tipo_incapacidad e
         where a.id_contrato=b.id_contrato and b.id_persona=c.id_persona
         and b.eps=d.id_eps and a.id_tipo_incapacidad=e.id_tipo_incapacidad;');
+       /** return view('incapacidad.index')->with('listar', $listar);*/
+        return View::make('incapacidad.index', compact('listar'));
 
     }
 

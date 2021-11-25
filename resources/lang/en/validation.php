@@ -36,7 +36,7 @@ return [
     'date_format'          => 'El campo :attribute no corresponde con el formato de fecha :format.',
     'different'            => 'Los campos :attribute y :other deben ser diferentes.',
     'digits'               => 'El campo :attribute debe ser un número de :digits dígitos.',
-    'digits_between'       => 'Ingrese un número de documento válido.',
+    'digits_between'       => 'El formato del campo :attribute es inválido.',
     'dimensions'           => 'El campo :attribute tiene dimensiones de imagen inválidas.',
     'distinct'             => 'El campo :attribute tiene un valor duplicado.',
     'email'                => 'El campo :attribute debe ser una dirección de correo válida.',
@@ -113,7 +113,7 @@ return [
     'starts_with'          => 'El campo :attribute debe comenzar con uno de los siguientes valores: :values',
     'string'               => 'El campo :attribute debe ser una cadena de caracteres.',
     'timezone'             => 'El campo :attribute debe ser una zona horaria válida.',
-    'unique'               => 'Este número de documento ya está registrado.',
+    'unique'               => 'El registro del campo :attribute ya existe.',
     'uploaded'             => 'El campo :attribute no se pudo subir.',
     'url'                  => 'El formato del campo :attribute es inválido.',
     'uuid'                 => 'El campo :attribute debe ser un UUID válido.',
@@ -133,7 +133,18 @@ return [
         'email' => [
             'email' => 'Ingrese un correo electrónico válido.',
             'regex' => 'Ingrese el correo electrónico corporativo.'
+        ],
+        'nombre' => [
+            'regex' => 'Ingrese un campo de nombre correcto.'
+        ],
+        'primer_apellido' =>[
+            'regex' => 'Ingrese un campo de apellido correcto.'
+        ],
+        'segundo_apellido' => [
+            'regex' => 'Ingrese un campo de apellido correcto.'
         ]
+
+
 
     ],
 
@@ -149,8 +160,16 @@ return [
     */
 
     'attributes' => [
+
         'ciudad_exp'=> 'ciudad de expedición',
-        'email'=>'correo electrónico'
+        'email'=>'correo electrónico',
+        'tipo_sangre' => 'tipo de sangre',
+        'fecha_nacimiento' => 'fecha de nacimiento',
+        'ciudad_resid' => 'ciudad de residencia',
+        'direccion' => 'dirección',
+        'estado_colab' => 'estado del colaborador',
+        'nomapell_emrg' => 'nombre y apellido de contacto de emergencia',
+        'contacto_emrg' => 'número de contacto de emergencia'
     ],
 
 

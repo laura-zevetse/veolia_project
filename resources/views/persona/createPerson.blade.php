@@ -15,11 +15,11 @@
         <div class="container-fluid">
             <div class="row mt-2">
                 <div class="col-sm-4">
-                    <h4><i class="fas fa-fw fa-users" style="margin-right: 14px;"></i>Añadir Colaborador</h4>
+                    <h2><i class="fas fa-fw fa-users" style="margin-right: 8px;"></i>Añadir Colaborador</h2>
                 </div>
                 <div class="col-sm-8">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Inicio</a></li>
                         <li class="breadcrumb-item"><a href="/persona">Colaboradores</a></li>
                         <li class="breadcrumb-item">Añadir Colaboradores</li>
                     </ol>
@@ -82,7 +82,6 @@
                                 <div class="col-sm-1 mt-2 text-center"></div>
                                 <div class="col-sm-3 mt-4 text-center">
                                     <img id="foto_img" src="../img/foto.png" style="width: 80%;" />
-                
                                     <input class="form-control mt-3" type="file" name="foto" class="form-control" id="image-input" placeholder="Elija la foto del colaborador" accept="image/*">
                                 </div>
                                 <div class="col-sm-8">
@@ -276,7 +275,9 @@
                                                     placeholder="" />
                                             </div>
                                             <label for="celular" class="col-sm-4 col-form-label pb-3"
-                                                style="color: #4b545c;">Celular</label>
+                                                style="color: #4b545c;">Celular <i class="fas fa-info-circle"
+                                                data-toggle="tooltip" title="Separe con un '-' si es más de un número de celular."
+                                                class="tooltiptext"></i></label>
                                             <div class="col-sm-8 pb-3">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" name="celular"
@@ -337,9 +338,14 @@
                                                 <input type="text" class="form-control" name="nomapell_emrg"
                                                     id="nomapell_emrg" placeholder=""
                                                     onkeyup="this.value=this.value.toUpperCase()" />
+                                                    @error('nomapell_emrg')
+                                                    <small class="text-danger">*{{ $message }}</small>
+                                                @enderror
                                             </div>
                                             <label for="contacto_emrg" class="col-sm-4 col-form-label pb-3"
-                                                style="color: #4b545c;">Celular</label>
+                                                style="color: #4b545c;">Celular <i class="fas fa-info-circle"
+                                                data-toggle="tooltip" title="Únicamente un número de celular."
+                                                class="tooltiptext"></i></label>
                                             <div class="col-sm-8 pb-3">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" name="contacto_emrg"
@@ -363,7 +369,6 @@
 
                     <!-------Content Menu2-forms------->
                     <div class="tab-pane fade" id="menu2" role="tabpanel">
-
                         <form id="secondForm" enctype="multipart/form-data" action="{{ route('persona.familiar') }}" method="POST">
                             @csrf
                             <div class="row">
@@ -372,9 +377,9 @@
                                     <div class="card-body">
                                         <div class="form-group row">
                                             <label for="id_persona_two" class="col-sm-4 col-form-label pb-3"
-                                                style="color: #4b545c;">Nombre Colaborador</label>
+                                                style="display: none">Nombre Colaborador</label>
                                             <div class="col-sm-8 pb-3">
-                                                <select type="text" class="form-control" name="id_persona"
+                                                <select class="form-control"  style="display: none" name="id_persona"
                                                     id="id_persona_two">
                                                 </select>
                                             </div>
@@ -468,10 +473,10 @@
                                     <div class="card-body">
                                         <div class="form-group row">
                                             <label for="id_persona" class="col-sm-4 col-form-label pb-3"
-                                                style="color: #4b545c;">Nombre Colaborador</label>
+                                                style="display:none">Nombre Colaborador</label>
                                             <div class="col-sm-8 pb-3">
                                                 <select type="text" class="form-control" name="id_persona"
-                                                    id="id_person_three">
+                                                    id="id_person_three" style="display:none">
                                                 </select>
                                             </div>
                                             <div class="container">
@@ -689,9 +694,9 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <a id="btnNextTwo" class="btn btn-success float-right">Continuar</a>
-                                        </div>
 
+                                        </div>
+                                        <a id="btnNextTwo" class="btn btn-success float-right">Continuar</a>
                                     </div>
                                 </div>
                             </div>
@@ -736,12 +741,11 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <a id="btnNext" type="submit" class="btn btn-success float-right">Continuar</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-2"></div>
-                        <a id="btnNext" type="submit" class="btn btn-success float-right">Continuar</a>
                     </div>
                     <!------/Content Menu4-forms------->
 
@@ -838,8 +842,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <!--<button id="btnGuardarM5" type="submit"
-                                        class="btn btn-success float-right">Guardar</button>-->
                                     <button id="btnGuardarM3" type="submit" class="btn btn-success float-right">Continuar</button>
                                 </div>
                             </div>
@@ -859,10 +861,10 @@
                                     <div class="card-body">
                                         <div class="form-group row">
                                             <label for="id_persona" class="col-sm-4 col-form-label pb-3"
-                                                style="color: #4b545c;">Nombre Colaborador</label>
+                                            style="display:none">Nombre Colaborador</label>
                                             <div class="col-sm-8 pb-3">
                                                 <select type="text" class="form-control" name="id_persona"
-                                                    id="id_persona_file">
+                                                style="display:none" id="id_persona_file">
                                                 </select>
                                             </div>
                                             <section class="d-flex text-center">
@@ -875,7 +877,7 @@
                                                                 y/o documentación requerida del colaborador.
                                                                 <br><b>Únicamente en formato
                                                                     PDF.</b></label>
-                                                         
+
                                                                 <input type="file" name="soporte" id="soporte">
                                                                 <button type="submit"
                                                                     class="btn btn-success btn-sm float-center">Cargar</button>
@@ -906,7 +908,7 @@
                 $('[data-toggle="tooltip"]').tooltip()
             })
             $(document).ready(function(e) {
-                $('#foto').change(function() {
+                $('#image-input').change(function() {
                     let reader = new FileReader();
                     reader.onload = (e) => {
                         $('#foto_img').attr('src', e.target.result);

@@ -50,8 +50,6 @@ class PersonaController extends Controller
             ->select('*')
             ->orderBy('primer_apellido', 'asc')
             ->get();
-
-
         return View::make('persona.index', compact('personas', 'busqueda'));
     }
 
@@ -136,13 +134,23 @@ class PersonaController extends Controller
     {
         $arrResponse = array();
         $validator = Validator::make($request->all(), [
-            'primer_apellido' => 'required|min:3|max:15',
-            'nombre' => 'required',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'primer_apellido' => 'required|regex:/^[\pL\s\-]+$/u|max:15',
+            'segundo_apellido' => 'nullable|regex:/^[\pL\s\-]+$/u|max:15',
+            'nombre' => 'required|regex:/^[\pL\s\-]+$/u',
             'id_persona' => 'required|digits_between:7,16|unique:persona',
-            //'ciudad_exp' => 'required',
+            'ciudad_exp' => 'required',
+            'sexo' => 'required',
+            'tipo_sangre' => 'required',
+            'fecha_nacimiento' => 'required',
+            'educacion' => 'required',
+            'ciudad_resid' => 'required',
+            'direccion' => 'required',
+            'celular' => 'required',
             'email' => 'required|email|regex:/(.*)@veolia\.com$/i|',
-            //'fecha_nacimiento' => 'required',
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'estado_colab' => 'required',
+            'nomapell_emrg'=>'nullable|regex:/^[\pL\s\-]+$/u|max:50',
+            'contacto_emrg' => 'digits_between:7,14'
         ]);
         $persona = new Persona;
         $archivo = $request->file('foto');
@@ -155,9 +163,21 @@ class PersonaController extends Controller
         if ($validator->passes())
         {
             $persona->primer_apellido = $request->primer_apellido;
-            $persona->id_persona = $request->id_persona;
+            $persona->segundo_apellido =$request->segundo_apellido;
             $persona->nombre = $request->nombre;
+            $persona->id_persona = $request->id_persona;
+            $persona->ciudad_exp = $request->ciudad_exp;
+            $persona->sexo = $request->sexo;
+            $persona->tipo_sangre = $request->tipo_sangre;
+            $persona->fecha_nacimiento = $request->fecha_nacimiento;
+            $persona->educacion = $request->educacion;
+            $persona->ciudad_resid = $request->ciudad_resid;
+            $persona->direccion = $request->direccion;
+            $persona->celular = $request->celular;
             $persona->email = $request->email;
+            $persona->estado_colab = $request->estado_colab;
+            $persona->nomapell_emrg = $request->nomapell_emrg;
+            $persona->contacto_emrg = $request->contacto_emrg;
             $persona->save();
             $dataPerson = $this->getDataPerson($request['id_persona']);
             $arrResponse['status'] = true;
@@ -180,7 +200,7 @@ class PersonaController extends Controller
         Familiar::insert($datosFamiliar);
         return response()->json([
             'status' => true,
-            'message' => 'Familiar registrado con exito'
+            'message' => 'Familiar registrado con éxito!'
         ], 200);
     }
 
@@ -188,8 +208,8 @@ class PersonaController extends Controller
     {
         $arrResponse = array();
         $validator = Validator::make($request->all(), [
-            'tipo_contrato' => 'required',
-            'id_persona' => 'required|digits_between:7,16'
+            'id_persona' => 'required|digits_between:7,16',
+            'tipo_contrato' => 'required'
         ]);
         if ($validator->passes()) {
             $datosContrato = request()->except('_token');
@@ -263,7 +283,8 @@ class PersonaController extends Controller
     public function edit($id_persona)
     {
         $persona = Persona::findOrFail($id_persona);
-        $contratos = $persona->contrato;
+        $contra = Contrato::all();
+        $contratos = $contra->firstWhere('id_persona',$id_persona);
         $familiares = DB::table('familiar')
         ->select('familiar.id_persona','familiar.nombres_fliar', 'familiar.apellidos_fliar', 'familiar.apellidos_fliar','familiar.id_familiar','familiar.edad_fliar','familiar.sexo_fliar', 'p.nombre_parentezco')
         ->join('parentezco as p', 'p.id_parentezco', '=', 'familiar.parentezco')
@@ -334,6 +355,18 @@ class PersonaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function updatePerson(Request $request)
+    {
+    $arrResponse = array();
+       $persona=Persona::findOrFail($request->id_persona);
+       $persona->primer_apellido = $request->primer_apellido;
+       $persona->update();
+       $arrResponse['status'] = true;
+       $arrResponse['message'] = 'Contrato generado con éxito !';
+        return response()->json($arrResponse, 200);
+
+    }
+
     public function getDataPerson($id)
     {
         $data = Persona::findData($id);

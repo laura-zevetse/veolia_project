@@ -188,7 +188,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -300,14 +300,6 @@ return [
             'text' => 'Incapacidades',
             'url'  => '/incapacidad',
             'icon' => 'fas fa-fw fa-file-medical-alt',
-        ],
-
-        ['header' => 'ACCIONES'],
-        [
-            'text'       => 'Salir',
-            'icon_color' => 'red',
-            'url'        => '#',
-            'classes'  => 'text-danger text-uppercase',
         ]
     ],
 

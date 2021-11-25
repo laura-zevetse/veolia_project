@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('plugins.Datatables', true)
 @section('content')
+
     <!--Styles-->
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -10,12 +11,12 @@
     <div class="container-fluid">
         <div class="row mt-2">
             <div class="col-sm-6">
-                <h4><i class="fas fa-fw fa-file-medical-alt" style="margin-right: 14px;"></i>Administrar Incapacidades
-                </h4>
+                <h2><i class="fas fa-fw fa-file-medical-alt" style="margin-right: 8px;"></i>Administrar Incapacidades
+                </h2>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="/dashboard">Inicio</a></li>
                     <li class="breadcrumb-item">Incapacidades</li>
                 </ol>
             </div>
@@ -32,7 +33,7 @@
                 <button type="button" id="btnAñadirIncap" name="btnAñadirIncap" class="btn btn-success btn-sm"
                     onclick="window.location = 'incapacidad/createIncap'"
                     style="margin-right: 14px; margin-left: 14px;"><i class="fas fa-plus"
-                        style="margin-right: 5px;"></i>Añadir Nuevo</button>
+                        style="margin-right: 5px;"></i>Añadir Nueva</button>
             </div>
         </div>
     </form>

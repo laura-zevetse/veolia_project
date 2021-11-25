@@ -12,11 +12,11 @@
     <div class="container-fluid">
         <div class="row mt-2">
             <div class="col-sm-4">
-                <h4><i class="fas fa-fw fa-users" style="margin-right: 14px;"></i>Administrar Colaborador</h4>
+                <h2><i class="fas fa-fw fa-users" style="margin-right: 8px;"></i>Administrar Colaborador</h2>
             </div>
             <div class="col-sm-8">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="/dashboard">Inicio</a></li>
                     <li class="breadcrumb-item">Colaboradores</li>
                 </ol>
             </div>

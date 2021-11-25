@@ -20,6 +20,7 @@ $(document).ready(function(e) {
     $("#estrategico").select2();
     $("#centro_costo").select2();
     $("#tipo_dotacion").select2();
+
     $('#upload-image-form').submit(function(e) {
         e.preventDefault();
         let formData = new FormData(this);
@@ -69,7 +70,7 @@ $(document).ready(function(e) {
 
     $("#btnGuardarM1").on('click', function(e){
         e.preventDefault();
-        let data = $("#firstForm").serialize();      
+        let data = $("#firstForm").serialize();
         $.ajax({
             url: "createPerson",
             type:'POST',

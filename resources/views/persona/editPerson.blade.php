@@ -2,8 +2,6 @@
 @section('plugins.Datatables', true)
 @section('content')
     <!--Styles-->
-    {{-- {{var_dump($contratos);}}
-    {{ die() }} --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <!-- Script -->
@@ -11,17 +9,15 @@
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!--Title and breadcrum-->
-
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mt-2">
                 <div class="col-sm-4">
-                    <h4><i class="fas fa-fw fa-users" style="margin-right: 14px;"></i>
-                        {{ ucwords(strtolower($persona->nombre)) }}</h4>
+                    <h2><i class="fas fa-fw fa-users" style="margin-right: 8px;"></i> Editar Colaborador</h2>
                 </div>
                 <div class="col-sm-8">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Inicio</a></li>
                         <li class="breadcrumb-item"><a href="/persona">Colaboradores</a></li>
                         <li class="breadcrumb-item">Actualizar Colaboradores</li>
                     </ol>
@@ -67,9 +63,10 @@
                 <div class="tab-content" id="menu-content">
                     <!------Content Menu1-forms-------->
                     <div class="tab-pane fade show active" id="menu1" role="tabpanel">
-                        <form enctype="multipart/form-data" action="{{ route('persona.update', $id_persona) }}"
+                        <form enctype="multipart/form-data" action="{{ route('persona.update') }}"
                             method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="row">
                                 <div class="container">
                                     <h5 class="my-2" style="font-size: medium; color: black;"><b>Información
@@ -385,8 +382,8 @@
                                                                                 <th>Sexo</th>
                                                                             </tr>
                                                                         </thead>
-                                                                     
-                                                            
+
+
                                                                         <tbody>
                                                                             @forelse ($familiares as $value)
                                                                             <tr>
@@ -512,9 +509,8 @@
                                                 <select type="text" class="form-control" name="tipo_contrato"
                                                     id="tipo_contrato">
                                                     <option value="">--Seleccionar</option>
-                                                    @foreach ((array) $contratos as $contrato)
                                                         @foreach ($tipos_contr as $tipo_contrato)
-                                                            @if ($tipo_contrato->id_tipo_contrato == $contrato->tipo_contrato)
+                                                            @if ($tipo_contrato->id_tipo_contrato == isset($contratos->tipo_contrato))
                                                                 <option value="{{ $tipo_contrato['id_tipo_contrato'] }}"
                                                                     selected>
                                                                     {{ $tipo_contrato['nombre_tip_contrato'] }}</option>
@@ -523,7 +519,6 @@
                                                                     {{ $tipo_contrato['nombre_tip_contrato'] }}</option>
                                                             @endif
                                                         @endforeach
-                                                    @endforeach
                                                 </select>
                                             </div>
                                             <label for="salario" class="col-sm-4 col-form-label pb-3"
@@ -576,9 +571,8 @@
                                             <div class="col-sm-8 pb-3">
                                                 <select type="text" class="form-control" name="cargo" id="cargo">
                                                     <option value="">--Seleccionar</option>
-                                                    @foreach ((array) $contratos as $contrato)
                                                         @foreach ($cargos as $cargo)
-                                                            @if ($cargo->id_cargo == $contrato->cargo)
+                                                            @if ($cargo->id_cargo == isset ($contratos->cargo))
                                                                 <option value="{{ $cargo['id_cargo'] }}" selected>
                                                                     {{ $cargo['nombre_cargo'] }}</option>
                                                             @else
@@ -586,7 +580,6 @@
                                                                     {{ $cargo['nombre_cargo'] }}</option>
                                                             @endif
                                                         @endforeach
-                                                    @endforeach
                                                 </select>
                                             </div>
                                             <label for="area" class="col-sm-4 col-form-label pb-3"
@@ -594,9 +587,8 @@
                                             <div class="col-sm-8 pb-3">
                                                 <select type="text" class="form-control" name="area" id="area">
                                                     <option value="">--Seleccionar</option>
-                                                    @foreach ((array) $contratos as $contrato)
                                                         @foreach ($areas as $area)
-                                                            @if ($area->id_area == $contrato->area)
+                                                            @if ($area->id_area == isset($contratos->area))
                                                                 <option value="{{ $area['id_area'] }}" selected>
                                                                     {{ $area['nombre_area'] }}</option>
                                                             @else
@@ -604,7 +596,6 @@
                                                                     {{ $area['nombre_area'] }}</option>
                                                             @endif
                                                         @endforeach
-                                                    @endforeach
                                                 </select>
                                             </div>
                                             <label for="gerencia" class="col-sm-4 col-form-label pb-3"
@@ -612,9 +603,8 @@
                                             <div class="col-sm-8 pb-3">
                                                 <select type="text" class="form-control" name="gerencia" id="gerencia">
                                                     <option value="">--Seleccionar</option>
-                                                    @foreach ((array) $contratos as $contrato)
                                                         @foreach ($gerencias as $gerencia)
-                                                            @if ($gerencia->id_gerencia == $contrato->gerencia)
+                                                            @if ($gerencia->id_gerencia == isset($contratos->gerencia))
                                                                 <option value="{{ $gerencia['id_gerencia'] }}" selected>
                                                                     {{ $gerencia['nombre_gerencia'] }}</option>
                                                             @else
@@ -622,7 +612,6 @@
                                                                     {{ $gerencia['nombre_gerencia'] }}</option>
                                                             @endif
                                                         @endforeach
-                                                    @endforeach
                                                 </select>
                                             </div>
                                             <label for="sede" class="col-sm-4 col-form-label pb-3"
@@ -630,9 +619,8 @@
                                             <div class="col-sm-8 pb-3">
                                                 <select type="text" class="form-control" name="sede" id="sede">
                                                     <option value="">--Seleccionar</option>
-                                                    @foreach ((array) $contratos as $contrato)
                                                         @foreach ($sedes as $sede)
-                                                            @if ($sede->id_sede == $contrato->sede)
+                                                            @if ($sede->id_sede == isset($contratos->sede))
                                                                 <option value="{{ $sede['id_sede'] }}" selected>
                                                                     {{ $sede['nombre_sede'] }}</option>
                                                             @else
@@ -640,7 +628,6 @@
                                                                     {{ $sede['nombre_sede'] }}</option>
                                                             @endif
                                                         @endforeach
-                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="container">
@@ -655,9 +642,8 @@
                                                 <select type="text" class="form-control" name="unidad_negocio"
                                                     id="unidad_negocio">
                                                     <option value="">--Seleccionar</option>
-                                                    @foreach ((array) $contratos as $contrato)
                                                         @foreach ($uns_negoc as $un_negoc)
-                                                            @if ($un_negoc->id_und_negocio == $contrato->unidad_negocio)
+                                                            @if ($un_negoc->id_und_negocio == isset($contratos->unidad_negocio))
                                                                 <option value="{{ $un_negoc['id_und_negocio'] }}"
                                                                     selected>
                                                                     {{ $un_negoc['nombre_und_negocio'] }}</option>
@@ -666,7 +652,6 @@
                                                                     {{ $un_negoc['nombre_und_negocio'] }}</option>
                                                             @endif
                                                         @endforeach
-                                                    @endforeach
                                                 </select>
                                             </div>
                                             <label for="estrategico" class="col-sm-4 col-form-label pb-3"
@@ -675,9 +660,8 @@
                                                 <select type="text" class="form-control" name="estrategico"
                                                     id="estrategico">
                                                     <option value="">--Seleccionar</option>
-                                                    @foreach ((array) $contratos as $contrato)
                                                         @foreach ($estrategicos as $estrategico)
-                                                            @if ($estrategico->id_estrategico == $contrato->estrategico)
+                                                            @if ($estrategico->id_estrategico == isset($contratos->estrategico))
                                                                 <option value="{{ $estrategico['id_estrategico'] }}"
                                                                     selected>
                                                                     {{ $estrategico['nombre_estrategico'] }}</option>
@@ -686,7 +670,6 @@
                                                                     {{ $estrategico['nombre_estrategico'] }}</option>
                                                             @endif
                                                         @endforeach
-                                                    @endforeach
                                                 </select>
                                             </div>
                                             <label for="centro_costo" class="col-sm-4 col-form-label pb-3"
@@ -696,9 +679,8 @@
                                                 <select type="text" class="form-control" name="centro_costo"
                                                     id="centro_costo">
                                                     <option value="">--Seleccionar</option>
-                                                    @foreach ((array) $contratos as $contrato)
                                                         @foreach ($cents_costo as $cent_costo)
-                                                            @if ($cent_costo->id_centro_costo == $contrato->centro_costo)
+                                                            @if ($cent_costo->id_centro_costo == isset($contratos->centro_costo))
                                                                 <option value="{{ $cent_costo['id_centro_costo'] }}"
                                                                     selected>
                                                                     {{ $cent_costo['nombre_centcosto'] }}</option>
@@ -707,7 +689,6 @@
                                                                     {{ $cent_costo['nombre_centcosto'] }}</option>
                                                             @endif
                                                         @endforeach
-                                                    @endforeach
                                                 </select>
                                             </div>
                                             <label for="tipo_dotacion" class="col-sm-4 col-form-label pb-3"
@@ -717,9 +698,8 @@
                                                 <select type="text" class="form-control" name="tipo_dotacion"
                                                     id="tipo_dotacion">
                                                     <option value="">--Seleccionar</option>
-                                                    @foreach ((array) $contratos as $contrato)
                                                         @foreach ($tipos_dot as $tipo_dot)
-                                                            @if ($tipo_dot->id_tipo_dotac == $contrato->tipo_dotacion)
+                                                            @if ($tipo_dot->id_tipo_dotac == isset($contratos->tipo_dotacion))
                                                                 <option value="{{ $tipo_dot['id_tipo_dotac'] }}"
                                                                     selected>
                                                                     {{ $tipo_dot['nombre_tipo_dotac'] }}</option>
@@ -728,7 +708,6 @@
                                                                     {{ $tipo_dot['nombre_tipo_dotac'] }}</option>
                                                             @endif
                                                         @endforeach
-                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -751,9 +730,8 @@
                                         <div class="col-sm-8 pb-3">
                                             <select type="text" class="form-control" name="banco" id="banco">
                                                 <option value="">--Seleccionar</option>
-                                                @foreach ((array) $contratos as $contrato)
                                                     @foreach ($bancos as $banco)
-                                                        @if ($banco->id_banco == $contrato->banco)
+                                                        @if ($banco->id_banco == isset($contratos->banco))
                                                             <option value="{{ $banco['id_banco'] }}" selected>
                                                                 {{ $banco['nombre_banco'] }}</option>
                                                         @else
@@ -761,7 +739,6 @@
                                                                 {{ $banco['nombre_banco'] }}</option>
                                                         @endif
                                                     @endforeach
-                                                @endforeach
                                             </select>
                                         </div>
                                         <label for="num_cuenta" class="col-sm-4 col-form-label pb-3"
@@ -770,10 +747,8 @@
                                                 title="Únicamente números." class="tooltiptext"></i></label>
                                         <div class="col-sm-8 pb-3">
                                             <div class="input-group">
-                                                @foreach ((array) $contratos as $contrato)
                                                     <input type="text" class="form-control" name="num_cuenta"
-                                                        id="num_cuenta" value="{{ $contrato->num_cuenta }}" />
-                                                @endforeach
+                                                        id="num_cuenta" value="{{ isset($contratos->num_cuenta) }}" />
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i
                                                             class="far fa-credit-card text-lightblue"></i></span>
@@ -801,9 +776,8 @@
                                         <div class="col-sm-8 pb-3">
                                             <select type="text" class="form-control" name="eps" id="eps">
                                                 <option value="">--Seleccionar</option>
-                                                @foreach ((array) $contratos as $contrato)
                                                     @foreach ($epss as $eps)
-                                                        @if ($eps->id_eps == $contrato->eps)
+                                                        @if ($eps->id_eps == isset($contratos->eps))
                                                             <option value="{{ $eps['id_eps'] }}" selected>
                                                                 {{ $eps['nombre_eps'] }}</option>
                                                         @else
@@ -811,7 +785,6 @@
                                                                 {{ $eps['nombre_eps'] }}</option>
                                                         @endif
                                                     @endforeach
-                                                @endforeach
                                             </select>
                                         </div>
                                         <label for="afp" class="col-sm-4 col-form-label pb-3"
@@ -819,9 +792,8 @@
                                         <div class="col-sm-8 pb-3">
                                             <select type="text" class="form-control" name="afp" id="afp">
                                                 <option value="">--Seleccionar</option>
-                                                @foreach ((array) $contratos as $contrato)
                                                     @foreach ($afps as $afp)
-                                                        @if ($afp->id_afp == $contrato->afp)
+                                                        @if ($afp->id_afp == isset($contratos->afp))
                                                             <option value="{{ $afp['id_afp'] }}" selected>
                                                                 {{ $afp['nombre_afp'] }}</option>
                                                         @else
@@ -829,7 +801,6 @@
                                                                 {{ $afp['nombre_afp'] }}</option>
                                                         @endif
                                                     @endforeach
-                                                @endforeach
                                             </select>
                                         </div>
                                         <label for="fondo_cesantias" class="col-sm-4 col-form-label pb-3"
@@ -839,9 +810,8 @@
                                             <select type="text" class="form-control" name="fondo_cesantias"
                                                 id="fondo_cesantias">
                                                 <option value="">--Seleccionar</option>
-                                                @foreach ((array) $contratos as $contrato)
                                                     @foreach ($fondos_ces as $fondo_ces)
-                                                        @if ($fondo_ces->id_fondo_cesantias == $contrato->fondo_cesantias)
+                                                        @if ($fondo_ces->id_fondo_cesantias == isset($contratos->fondo_cesantias))
                                                             <option value="{{ $fondo_ces['id_fondo_cesantias'] }}"
                                                                 selected>
                                                                 {{ $fondo_ces['nombre_fondo_ces'] }}</option>
@@ -850,7 +820,6 @@
                                                                 {{ $fondo_ces['nombre_fondo_ces'] }}</option>
                                                         @endif
                                                     @endforeach
-                                                @endforeach
                                             </select>
                                         </div>
                                         <label for="riesgo" class="col-sm-4 col-form-label pb-3"
@@ -858,9 +827,8 @@
                                         <div class="col-sm-8 pb-3">
                                             <select type="text" class="form-control" name="riesgo" id="riesgo">
                                                 <option value="">--Seleccionar</option>
-                                                @foreach ((array) $contratos as $contrato)
                                                     @foreach ($riesgos as $riesgo)
-                                                        @if ($riesgo->id_riesgo == $contrato->riesgo)
+                                                        @if ($riesgo->id_riesgo == isset($contratos->riesgo))
                                                             <option value="{{ $riesgo['id_riesgo'] }}" selected>
                                                                 {{ $riesgo['nombre_riesgo'] }}</option>
                                                         @else
@@ -868,7 +836,6 @@
                                                                 {{ $riesgo['nombre_riesgo'] }}</option>
                                                         @endif
                                                     @endforeach
-                                                @endforeach
                                             </select>
                                         </div>
                                         <label for="caja_compensac" class="col-sm-4 col-form-label pb-3"
@@ -878,9 +845,8 @@
                                             <select type="text" class="form-control" name="caja_compensac"
                                                 id="caja_compensac">
                                                 <option value="">--Seleccionar</option>
-                                                @foreach ((array) $contratos as $contrato)
                                                     @foreach ($cajas_compen as $caja_compen)
-                                                        @if ($caja_compen->id_caja_compensac == $contrato->caja_compensac)
+                                                        @if ($caja_compen->id_caja_compensac == isset($contratos->caja_compensac))
                                                             <option value="{{ $caja_compen['id_caja_compensac'] }}"
                                                                 selected>
                                                                 {{ $caja_compen['nombre_caja_compensac'] }}</option>
@@ -889,7 +855,6 @@
                                                                 {{ $caja_compen['nombre_caja_compensac'] }}</option>
                                                         @endif
                                                     @endforeach
-                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -933,7 +898,9 @@
     <!--Menu-Navbar y Content Menu-forms-->
 @endsection
 
+<!--Scripts-->
 @section('js')
+    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script src="//cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
     <script src="//cdn.datatables.net/1.11.2/js/dataTables.bootstrap5.min.js"></script>
     <script>
@@ -952,7 +919,5 @@
     </script>
 @endsection
 
-<!--Scripts-->
-<script type="text/javascript" src="{{ asset('js/app.js') }}">
 
-</script>
+
