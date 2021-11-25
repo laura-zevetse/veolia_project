@@ -377,4 +377,17 @@ class PersonaController extends Controller
         return response()->json($arrResponse);
     }
 
+    public function getDataFamiliar($id)
+    {
+        $dataFamiliar = Familiar::findOrFail($id);
+        return response()->json($dataFamiliar);
+    }
+
+    public function updateFamiliar(Request $request)
+    {
+       $query=  DB::table('familiar')
+            ->where('id_familiar', $request->idFamiliar)
+            ->update(['parentezco' => $request->parentezco, 'apellidos_fliar' => $request->apellidos_fliar ]);
+        return response()->json($query);
+    }
 }

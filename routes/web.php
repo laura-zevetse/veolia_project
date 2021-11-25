@@ -32,6 +32,10 @@ Route::post('/persona/createArchivo', [PersonaController::class, 'archivo'])->na
 
 Route::get('/persona/editPerson/{id_persona}', [PersonaController::class, 'edit'])->name('persona.edit');
 
+Route::post('/persona/editFamiliar/{id}', [PersonaController::class, 'getDataFamiliar'])->name('familiar.edit');
+
+Route::post('/persona/editFamiliar', [PersonaController::class, 'updateFamiliar'])->name('familiar.store');
+
 Route::get('/incapacidad', [IncapacidadController::class, 'listIncap'])->name('incapacidad.list');
 
 Route::get('/incapacidad/createIncap', [IncapacidadController::class, 'createIncap'])->name('incapacidad.create');

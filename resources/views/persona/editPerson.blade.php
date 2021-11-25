@@ -344,20 +344,7 @@
                     <!------/Content Menu1-forms------->
                     <!-------Content Menu2-forms------->
                     <div class="tab-pane fade" id="menu2" role="tabpanel">
-                        <form enctype="multipart/form-data" action="{{ route('persona.update', $id_persona) }}"
-                            method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-2"></div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <div class="form-group row">
-                                            <input type="text" class="form-control" name="id_persona" id="id_persona"
-                                                value="{{ $persona->id_persona }}" style="display:none" />
-                                            <input type="text" class="form-control" name="primer_apellido"
-                                                id="primer_apellido" value="{{ $persona->primer_apellido }}"
-                                                style="display:none" />
-                                            <div class="container">
+                    <div class="container">
                                                 <h5 class="my-2" style="font-size: medium; color: black;">
                                                     <b>Información del Familiar</b>
                                                 </h5>
@@ -380,6 +367,7 @@
                                                                                 <th>Nombre</th>
                                                                                 <th>Edad</th>
                                                                                 <th>Sexo</th>
+                                                                                <th>Acciones</th>
                                                                             </tr>
                                                                         </thead>
 
@@ -393,11 +381,11 @@
                                                                                 <td>{{ $value->nombres_fliar }}</td>
                                                                                 <td>{{ $value->edad_fliar }}</td>
                                                                                 <td>{{ $value->sexo_fliar }}</td>
+                                                                                <td><button id="btnEditFamiliar"><input id="family"  type="hidden" value="{{$value->id_familiar}}">Modificar</button></td>
                                                                             </tr>
                                                                             @empty
                                                                                 <p>No users</p>
                                                                             @endforelse
-
                                                                             <tr>
                                                                                 <td></td>
                                                                             </tr>
@@ -411,6 +399,19 @@
                                                 </div>
                                             </div>
 
+                        <form id="formularioEditarFamiliar">
+                            @csrf
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <input type="text" class="form-control" name="id_persona" id="id_persona"
+                                                value="{{ $persona->id_persona }}" style="display:none" />
+                                            <input type="text" class="form-control" name="primer_apellido"
+                                                id="primer_apellido" value="{{ $persona->primer_apellido }}"
+                                                style="display:none" />
+                                            <input type="hidden" id="idFamiliar" value="" name="idFamiliar">
                                             <label for="parentezco" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Parentezco</label>
                                             <div class="col-sm-8 pb-3">
@@ -447,7 +448,7 @@
                                             <div class="col-sm-8 pb-3">
                                                 <div class="input-group">
                                                     <input type="date" class="form-control" name="fecha_nacimiento"
-                                                        id="fecha_nacimiento" value="" />
+                                                        id="fecha_nacimientoFamiliar" value="" />
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i
                                                                 class="far fa-calendar-alt text-lightblue"></i></span>
@@ -457,12 +458,12 @@
                                             <label for="edad" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Edad</label>
                                             <div class="col-sm-8 pb-3">
-                                                <input type="text" class="form-control" name="edad" id="edad" value="" />
+                                                <input type="text" class="form-control" name="edad" id="edadFamiliar" value="" />
                                             </div>
                                             <label for="gen" class="col-sm-4 col-form-label pb-3"
                                                 style="color: #4b545c;">Sexo</label>
                                             <div class="col-sm-8 pb-3">
-                                                <select type="" class="form-control" name="sexo" id="sexo">
+                                                <select type="" class="form-control" name="sexo" id="sexoFamiliar">
                                                     <option value="">--Seleccionar</option>
                                                     @foreach ($sexos as $sexo)
                                                         <option value="{{ $sexo['id_sexo'] }}">
@@ -472,7 +473,7 @@
                                             </div>
 
                                         </div>
-                                        <button id="btnGuardarM2" type="submit"
+                                        <button id="btnActualizarFamiliar" type="submit"
                                             class="btn btn-success float-right">Actualizar</button>
                                     </div>
                                 </div>
@@ -915,9 +916,55 @@
     <script>
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()
-        })
+        });
+
+        $("#btnEditFamiliar").on('click', function(e){
+            e.preventDefault();
+            let data = $("#family").val();
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            });
+            $.ajax({
+                url: "/persona/editFamiliar/"+data,
+                type:'POST',
+                data: data,
+                success: function(data) { 
+                    $("#idFamiliar").val(data.id_familiar);
+                    $("#parentezco").val(data.parentezco);
+                    $("#apellidos_fliar").val(data.apellidos_fliar);
+                    $("#nombres_fliar").val(data.nombres_fliar);
+                    $("#fecha_nacimientoFamiliar").val(data.fecha_nac_fliar);
+                    $("#edadFamiliar").val(data.edad_fliar);
+                    $("#sexoFamiliar").val(data.sexo_fliar);
+                    
+                }
+            });
+        });
+        //update 
+        $('#formularioEditarFamiliar').submit(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type:'POST',
+                url: `/persona/editFamiliar`,
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (data) => {
+                    console.log(data);
+                },
+                error: function(err){
+                    console.error(err);
+                }
+            });
+        });
     </script>
 @endsection
-
-
 
