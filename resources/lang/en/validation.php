@@ -160,7 +160,7 @@ return [
     */
 
     'attributes' => [
-
+        'id_persona' => 'número de documento',
         'ciudad_exp'=> 'ciudad de expedición',
         'email'=>'correo electrónico',
         'tipo_sangre' => 'tipo de sangre',
@@ -169,7 +169,26 @@ return [
         'direccion' => 'dirección',
         'estado_colab' => 'estado del colaborador',
         'nomapell_emrg' => 'nombre y apellido de contacto de emergencia',
-        'contacto_emrg' => 'número de contacto de emergencia'
+        'contacto_emrg' => 'número de contacto de emergencia',
+        'tipo_contrato' => 'tipo de contrato',
+        'salario' => 'salario',
+        'fecha_ingreso' => 'fecha de ingreso',
+        'fecha_vencimiento' => 'fecha de vencimiento',
+        'cargo' => 'cargo',
+        'area' => 'área',
+        'gerencia' => 'gerencia',
+        'sede' => 'sede',
+        'unidad_negocio' => 'unidad de negocio',
+        'estrategico' => 'estratégico',
+        'centro_costo' => 'centro de costo',
+        'tipo_dotacion' => 'tipo de dotación',
+        'banco' => 'banco',
+        'num_cuenta' => 'número de cuenta',
+        'eps' => 'EPS',
+        'afp' => 'AFP',
+        'fondo_cesantias' => 'fondo de cesantías',
+        'riesgo' => 'riesgo',
+        'caja_compensac' => 'caja de compensación'
     ],
 
 

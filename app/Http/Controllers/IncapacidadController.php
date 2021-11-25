@@ -26,7 +26,6 @@ class IncapacidadController extends Controller
         from incapacidad a, contrato b, persona c, eps d, tipo_incapacidad e
         where a.id_contrato=b.id_contrato and b.id_persona=c.id_persona
         and b.eps=d.id_eps and a.id_tipo_incapacidad=e.id_tipo_incapacidad;');
-       /** return view('incapacidad.index')->with('listar', $listar);*/
         return View::make('incapacidad.index', compact('listar'));
 
     }

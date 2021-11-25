@@ -20,6 +20,8 @@ $(document).ready(function(e) {
     $("#estrategico").select2();
     $("#centro_costo").select2();
     $("#tipo_dotacion").select2();
+    $("#eps").select2();
+    $("#afp").select2();
 
     $('#upload-image-form').submit(function(e) {
         e.preventDefault();
@@ -118,6 +120,14 @@ function calcularEdad(){
     dateLast = $("#fechaActual").val().substring(0, 4);
     age = dateFirst - dateLast;
     $("#edad").val(Math.abs(age)+' años');
+}
+
+function calcularAntiguedad(){
+    let dateFirst, dateLast, cant;
+    dateFirst = $("#fecha_ingreso").val().substring(0, 4);
+    dateLast = $("#fechaActual").val().substring(0, 4);
+    cant = dateFirst - dateLast;
+    $("#antiguedad").val(Math.abs(cant)+' años');
 }
 
 $("#btnNext").on('click', function(){

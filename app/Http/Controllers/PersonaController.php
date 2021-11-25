@@ -147,10 +147,10 @@ class PersonaController extends Controller
             'ciudad_resid' => 'required',
             'direccion' => 'required',
             'celular' => 'required',
-            'email' => 'required|email|regex:/(.*)@veolia\.com$/i|',
+            'email' => 'required|email|regex:/(.*)@veolia\.com$/i|unique:persona',
             'estado_colab' => 'required',
             'nomapell_emrg'=>'nullable|regex:/^[\pL\s\-]+$/u|max:50',
-            'contacto_emrg' => 'digits_between:7,14'
+            'contacto_emrg' => 'nullable|digits_between:7,14'
         ]);
         $persona = new Persona;
         $archivo = $request->file('foto');
@@ -209,7 +209,26 @@ class PersonaController extends Controller
         $arrResponse = array();
         $validator = Validator::make($request->all(), [
             'id_persona' => 'required|digits_between:7,16',
-            'tipo_contrato' => 'required'
+            'tipo_contrato' => 'required',
+            'salario' => 'required|digits_between:6,10',
+            'fecha_ingreso' => 'required',
+            'fecha_vencimiento' => 'required',
+            'cargo' => 'required',
+            'area' => 'required',
+            'gerencia' => 'required',
+            'sede' => 'required',
+            'unidad_negocio' => 'required',
+            'estrategico' => 'required',
+            'centro_costo' => 'required',
+            'tipo_dotacion' => 'required',
+            'banco' => 'required',
+            'num_cuenta' => 'required',
+            'eps' => 'required',
+            'afp' => 'required',
+            'fondo_cesantias' => 'required',
+            'riesgo' => 'required',
+            'caja_compensac' => 'required'
+
         ]);
         if ($validator->passes()) {
             $datosContrato = request()->except('_token');
@@ -260,18 +279,6 @@ class PersonaController extends Controller
             ], 400);
         }
 
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -357,13 +364,9 @@ class PersonaController extends Controller
      */
     public function updatePerson(Request $request)
     {
-    $arrResponse = array();
        $persona=Persona::findOrFail($request->id_persona);
        $persona->primer_apellido = $request->primer_apellido;
        $persona->update();
-       $arrResponse['status'] = true;
-       $arrResponse['message'] = 'Contrato generado con éxito !';
-        return response()->json($arrResponse, 200);
 
     }
 

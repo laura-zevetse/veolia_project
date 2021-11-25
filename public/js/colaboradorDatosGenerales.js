@@ -3,7 +3,7 @@ function calcularEdadFamiliar(){
     dateFirst = $("#fecha_nac_fliar").val().substring(0, 4);
     dateLast = $("#fechaActual").val().substring(0, 4);
     age = dateFirst - dateLast;
-    $("#edad_fliar").val(Math.abs(age));
+    $("#edad_fliar").val(Math.abs(age)+' años.');
 }
 
 $("#parentezco").on('change', function(){
@@ -80,7 +80,7 @@ $("#btnGuardarM2").on('click', function(e){
             $(".print-error-msg").css('display','block');
             var obj = JSON.parse(err.responseText);
             Object.entries(obj.errors).forEach(([key, value]) => {
-                    $(".print-error-msg").find("ul").append('<li>'+value.toString().replace('id persona', 'Número de documento')+'</li>');
+                    $(".print-error-msg").find("ul").append('<li>'+value.toString().replace('id persona', 'número de documento')+'</li>');
             });
         }
     });
@@ -94,7 +94,7 @@ $("#btnGuardarM3").on('click', function(e){
       type:'POST',
       data: data,
       success: function(data) {
-          $("#errFormPersona").css({'display':'none'});
+          $("#errFormContrato").css({'display':'none'});
           if(data.status){
               Swal.fire({
                   icon: 'success',
@@ -150,14 +150,6 @@ $("#btnGuardarM3").on('click', function(e){
       },
       error: function(err){
         console.error(err);
-        /*$(".print-error-msg").find("ul").html('');
-        $(".print-error-msg").css('display','block');
-        var obj = JSON.parse(err.responseText);
-        Object.entries(obj.errors).forEach(([key, value]) => {
-            $(".print-error-msg").find("ul").append('<li>'+value.toString().replace('id persona', 'número de documento')+'</li>');
-        });*/
     }
   });
-
-
 });

@@ -342,6 +342,7 @@
                         <div class="col-sm-2 mt-2 text-center"></div>
                     </div>
                     <!------/Content Menu1-forms------->
+
                     <!-------Content Menu2-forms------->
                     <div class="tab-pane fade" id="menu2" role="tabpanel">
                     <div class="container">
@@ -350,7 +351,6 @@
                                                 </h5>
                                                 <hr class="my-1" width="650" size="2px">
                                             </div>
-
                                             <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-12">
@@ -380,11 +380,16 @@
                                                                                 <td>{{ $value->apellidos_fliar }}</td>
                                                                                 <td>{{ $value->nombres_fliar }}</td>
                                                                                 <td>{{ $value->edad_fliar }}</td>
-                                                                                <td>{{ $value->sexo_fliar }}</td>
+                                                                                <td>@if($value->sexo_fliar == 1)
+                                                                                    FEMENINO
+                                                                                    @else
+                                                                                    MASCULINO
+                                                                                    @endif
+                                                                                </td>
                                                                                 <td><button id="btnEditFamiliar"><input id="family"  type="hidden" value="{{$value->id_familiar}}">Modificar</button></td>
                                                                             </tr>
                                                                             @empty
-                                                                                <p>No users</p>
+                                                                                <p>No se encontraron registros de familiares.</p>
                                                                             @endforelse
                                                                             <tr>
                                                                                 <td></td>

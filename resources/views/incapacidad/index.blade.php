@@ -38,7 +38,6 @@
         </div>
     </form>
     <!--/Buttons(add, search & filter)-->
-
     <!--Table-->
     <div class="container-fluid">
         <div class="row">
@@ -59,7 +58,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                 </tbody>
                             </table>
                         </div>

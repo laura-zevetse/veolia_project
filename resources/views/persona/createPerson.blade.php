@@ -521,7 +521,7 @@
                                             <div class="col-sm-8 pb-3">
                                                 <div class="input-group">
                                                     <input type="date" class="form-control" name="fecha_ingreso"
-                                                        id="fecha_ingreso" />
+                                                        id="fecha_ingreso" onchange="calcularAntiguedad();"/>
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i
                                                                 class="far fa-calendar-alt text-lightblue"></i></span>
@@ -544,7 +544,7 @@
                                                 style="color: #4b545c;">Antigüedad</label>
                                             <div class="col-sm-8 pb-3">
                                                 <input type="text" class="form-control" name="antiguedad"
-                                                    id="antiguedad" />
+                                                    id="antiguedad" readonly="" />
                                             </div>
                                             <div class="container">
                                                 <h5 class="my-2" style="font-size: medium; color: black;">
@@ -902,7 +902,7 @@
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/select2.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/colaboradorDatosPersonales.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/datosFamiliares.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/colaboradorDatosGenerales.js') }}"></script>
         <script>
             $(function() {
                 $('[data-toggle="tooltip"]').tooltip()
